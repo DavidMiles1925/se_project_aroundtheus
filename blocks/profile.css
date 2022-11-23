@@ -37,18 +37,17 @@
   margin: 15px 18px;
   max-width: 24px;
   max-height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .profile__edit-button:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__edit-icon {
   max-width: 10px;
   padding-bottom: 100%;
+  margin-top: 4px;
 }
 
 .profile__add-button {
@@ -67,6 +66,7 @@
 
 .profile__add-button:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__add-icon {
