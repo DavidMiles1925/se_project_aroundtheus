@@ -1,0 +1,21 @@
+.header {
+  max-width: 880px;
+  height: 74px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__divider {
+  max-width: 100%;
+  margin: auto 0 0;
+  border-bottom: 2px solid #fff;
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    max-width: 581px;
+  }
+}
