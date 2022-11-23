@@ -2,3 +2,9 @@
   max-width: 173px;
   max-height: 33px;
 }
+
+@media screen and (max-width: 1140px) {
+  .logo {
+    margin-left: 27px;
+  }
+}
