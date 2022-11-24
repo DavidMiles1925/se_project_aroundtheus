@@ -29,7 +29,6 @@
 
 .card__title {
   margin: 0;
-  /*Figma states 219px but this clips button when maintaining specified padding*/
   max-width: 212px;
   font-weight: 900;
   font-size: 24px;

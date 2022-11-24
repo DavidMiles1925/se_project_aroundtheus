@@ -10,11 +10,11 @@
 .header__divider {
   max-width: 100%;
   margin: auto 0 0;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
   flex-grow: 1;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1120px) {
   .header {
     max-width: 581px;
   }
