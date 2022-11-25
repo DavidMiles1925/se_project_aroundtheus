@@ -6,19 +6,21 @@
 .footer__text {
   color: #545454;
   max-width: 318px;
-  height: 18px;
-  font-size: 18px;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1120px) {
   .footer {
     max-width: 581px;
     margin: 48px auto 0;
   }
 }
 
-@media screen and (max-width: 746px) {
+@media screen and (max-width: 644px) {
   .footer {
     max-width: 282px;
+  }
+
+  .footer__text {
+    font-size: 14px;
   }
 }

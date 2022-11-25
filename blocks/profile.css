@@ -1,5 +1,4 @@
 .profile {
-  grid-area: profile;
   max-width: 880px;
   margin: 36px auto;
   display: flex;
@@ -7,9 +6,9 @@
 }
 
 .profile__image {
-  max-width: 169px;
+  max-width: 128px;
   border-radius: 100%;
-  margin-right: 22px;
+  margin-right: 20px;
 }
 
 .profile__info {
@@ -25,7 +24,6 @@
 }
 
 .profile__description {
-  font-size: 18px;
   margin: 0;
   flex-basis: 100%;
 }
@@ -34,6 +32,7 @@
   background-image: url("../images/edit-icon.svg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 10px;
   box-sizing: border-box;
   border: 2px solid #fff;
   background-color: #000;
@@ -102,13 +101,22 @@
 }
 
 @media screen and (max-width: 644px) {
+  .profile__info {
+    justify-content: flex-end;
+  }
+
   .profile__title {
     margin-top: 26px;
     font-size: 22px;
   }
 
+  .profile__description {
+    font-size: 14px;
+  }
+
   .profile__edit-button {
-    margin-top: 30px;
+    background-size: 7px;
+    margin: 30px 23px 15px 10px;
     max-width: 18px;
     max-height: 18px;
   }
@@ -116,6 +124,10 @@
   .profile__add-button {
     max-width: 282px;
     margin: 31px 0 0;
+  }
+
+  .profile__add-icon {
+    max-width: 16px;
   }
 }
 
