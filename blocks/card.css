@@ -1,11 +1,11 @@
 .card {
   max-width: 282px;
-  height: 361px;
 }
 
 .card__image {
   max-width: 282px;
   border-radius: 10px 10px 0 0;
+  display: block;
 }
 
 .card__info {
@@ -41,11 +41,4 @@
 .card__button:hover {
   opacity: 0.5;
   cursor: pointer;
-}
-
-@media screen and (max-width: 1140px) {
-  .cards {
-    margin: 0 auto;
-    justify-content: center;
-  }
 }
