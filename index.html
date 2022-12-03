@@ -18,6 +18,37 @@
   </head>
   <body>
     <div class="page">
+      <div class="modal modal_open">
+        <div class="modal__container">
+          <button class="modal__close-button" type="button" name="close">
+            <img class="modal__close-icon" src="./images/close-icon.png" />
+          </button>
+          <form class="form">
+            <h2 class="form__description">Edit Profile</h2>
+            <fieldset class="form__fieldset">
+              <input
+                type="text"
+                class="form__input"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+              <input
+                type="text"
+                class="form__input"
+                id="about"
+                name="about"
+                placeholder="About Me"
+                required
+              />
+              <button type="submit" class="form__submit-button" name="submit">
+                Save
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
       <header class="header">
         <img class="logo" src="./images/logo.svg" alt="Logo" />
       </header>

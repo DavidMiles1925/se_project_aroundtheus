@@ -9,6 +9,7 @@
   line-height: 1.2;
   color: #fff;
   padding: 45px 15vw 60px;
+  display: block;
 }
 
 @media screen and (max-width: 1280px) {
