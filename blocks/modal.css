@@ -30,6 +30,11 @@
   height: 56px;
 }
 
+.modal__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .modal__close-icon {
   width: 28px;
   height: 28px;
