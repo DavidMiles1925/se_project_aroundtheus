@@ -1,4 +1,3 @@
-// Card array
 let initialCards = [
   {
     name: "Yosimite Valley",

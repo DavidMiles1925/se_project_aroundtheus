@@ -28,28 +28,38 @@ Design specifications were taken from a Figma project and duplicated using HTML 
 
 Images were exported from the Figma project and optimized to reduce loading time and ensure that appropriate file types were used.
 
+### JavaScript
+
+**Objects and Arrays**
+
+An array of objects was created to store the atttributes that would be used to render cards.
+
+![Objects](./images/readme_objects.png)
+
+**Selecting Elements**
+
+I used the .querySelector() method to access elements of the document.
+
+![Query](./images/readme_querySelector.png)
+
+**Event Listeners**
+
+Event listeners were used to detect when buttons on the page were clicked, and to respond with corresponding functions to complete desired tasks.
+
+![Events](./images/readme_events.png)
+
+**Variables and Functions**
+
+Variables were used to store and pass values rather than using 'magic numbers' to perform tasks. Functions were used to generate repeatable code and increase code readability.
+
+![Variables/Functions](./images/readme_variables_and_functions.png)
+
+**Loops and Templates**
+
+A for...of loop was used to render cards based on a template instead of hardcoding the cards in the HTML.
+
+![Loops](./images/readme_loops.png)
+
 ### Github Publication
 
 The project was published on GitHub pages so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/)
-
-## Below is the brief I was given for this project:
-
-### Overview
-
-- Intro
-- Figma
-- Images
-
-**Intro**
-
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
-
-**Figma**
-
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!
