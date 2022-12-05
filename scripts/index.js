@@ -29,7 +29,7 @@ const modalOverlay = document.querySelector(".modal");
 const formElement = document.querySelector(".form");
 const profileElement = document.querySelector(".profile");
 
-const closeButton = modalOverlay.querySelector(".modal__close-button");
+const closeButton = formElement.querySelector(".form__close-button");
 const submitButton = formElement.querySelector(".form__submit-button");
 const editButton = profileElement.querySelector(".profile__edit-button");
 
