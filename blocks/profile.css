@@ -21,11 +21,19 @@
   font-weight: 500;
   font-size: 42px;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
 }
 
 .profile__description {
   margin: 0;
   flex-basis: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 570px;
 }
 
 .profile__edit-button {
