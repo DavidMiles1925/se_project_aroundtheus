@@ -1,7 +1,7 @@
 let initialCards = [
   {
     name: "Yosimite Valley",
-    link: "./se_project_aroundtheus_images/yosemite.jpg",
+    link: "./images/yosemite.jpg",
   },
   {
     name: "Lake Louise",
