@@ -68,7 +68,7 @@ function handleFormSubmit(evt) {
 }
 
 function getCardElement(data) {
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   cardElement.querySelector(".card__title").textContent = data["name"];
   cardElement.querySelector(".card__image").src = data["link"];
@@ -79,13 +79,7 @@ function getCardElement(data) {
 
 function appendCards() {
   for (card of initialCards) {
-    let data = ["name", "link", "alt"];
-
-    data["name"] = card.name;
-    data["link"] = card.link;
-    data["alt"] = card.alt;
-
-    let newCard = getCardElement(data);
+    let newCard = getCardElement(card);
 
     cardsDisplayed.append(newCard);
   }
