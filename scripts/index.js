@@ -118,11 +118,12 @@ function hideModal() {
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
+  console.log(formSelector);
 
-  if ((formSelector = "edit")) {
+  if (formSelector === "edit") {
     currentNameText.textContent = formNameText.value;
     currentAboutText.textContent = formAboutText.value;
-  } else if ((formSelector = "add")) {
+  } else if (formSelector === "add") {
     let createdCard = {
       name: formNameText.value,
       link: formAboutText.value,
