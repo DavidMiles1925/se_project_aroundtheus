@@ -25,6 +25,8 @@ let initialCards = [
   },
 ];
 
+const bodyElement = document.querySelector(".body");
+
 const formElement = document.querySelector(".form");
 const formDescription = formElement.querySelector(".form__description");
 
@@ -54,6 +56,7 @@ const modalImageDescription = document.querySelector(
 let formSelector = "";
 
 function clearImage() {
+  bodyElement.classList.remove("preload");
   formElement.classList.remove("form_closed");
   modalImagesElement.classList.add("modal__image_closed");
   modalContainer.classList.remove("modal__container_type_image");
@@ -88,6 +91,7 @@ function displayAdd() {
 }
 
 function showModalImage() {
+  bodyElement.classList.remove("preload");
   modalImage.src = this.src;
   modalImage.alt = this.alt;
   modalImagesElement.classList.remove("modal__image_closed");

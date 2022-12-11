@@ -12,6 +12,13 @@
   display: block;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
 @media screen and (max-width: 1280px) {
   .page {
     padding: 45px 10vw 60px;
