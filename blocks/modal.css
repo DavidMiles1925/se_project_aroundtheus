@@ -41,12 +41,12 @@
   transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
-.modal__image_type_open {
+.modal__images_type_open {
   visibility: visible;
   transition: visibility 0s, opacity 0.5s linear;
 }
 
-.modal__image_type_closed {
+.modal__images_type_closed {
   display: none;
 }
 
