@@ -68,7 +68,7 @@
             name="close"
             aria-label="close"
           ></button>
-          <form class="form">
+          <form class="form form_type_edit-profile form_closed">
             <h2 class="form__description">Edit Profile</h2>
             <fieldset class="form__fieldset">
               <input
@@ -89,6 +89,30 @@
               />
               <button type="submit" class="form__submit-button" name="submit">
                 Save
+              </button>
+            </fieldset>
+          </form>
+          <form class="form form_type_add-card form_closed">
+            <h2 class="form__description">New Place</h2>
+            <fieldset class="form__fieldset">
+              <input
+                type="text"
+                class="form__input form__input_type_place"
+                id="place"
+                name="place"
+                placeholder="Title"
+                required
+              />
+              <input
+                type="text"
+                class="form__input form__input_type_image-link"
+                id="image-link"
+                name="image-link"
+                placeholder="Image link"
+                required
+              />
+              <button type="submit" class="form__submit-button" name="create">
+                Create
               </button>
             </fieldset>
           </form>

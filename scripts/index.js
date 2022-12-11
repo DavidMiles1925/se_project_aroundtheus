@@ -32,30 +32,50 @@ let initialCards = [
 ];
 
 const modalOverlay = document.querySelector(".modal");
-const formElement = document.querySelector(".form");
+const formEditElement = document.querySelector(".form_type_edit-profile");
+const formAddElement = document.querySelector(".form_type_add-card");
 const profileElement = document.querySelector(".profile");
 
 const closeButton = modalOverlay.querySelector(".modal__close-button");
-const submitButton = formElement.querySelector(".form__submit-button");
+const submitButton = formEditElement.querySelector(".form__submit-button");
+const createButton = formAddElement.querySelector(".form__submit-button");
 const editButton = profileElement.querySelector(".profile__edit-button");
+const addButton = profileElement.querySelector(".profile__add-button");
 
-const formNameText = formElement.querySelector(".form__input_type_name");
-const formAboutText = formElement.querySelector(".form__input_type_about");
+const formNameText = formEditElement.querySelector(".form__input_type_name");
+const formAboutText = formEditElement.querySelector(".form__input_type_about");
 const currentNameText = profileElement.querySelector(".profile__title");
 const currentAboutText = profileElement.querySelector(".profile__description");
+const formPlaceText = formAddElement.querySelector(".form__input_type_place");
+const formImageLinkText = formAddElement.querySelector(
+  ".form__input_type_image-link"
+);
 
 const cardTemplate = document.querySelector("#card").content;
 const cardsDisplayed = document.querySelector(".cards");
 
-function displayModal() {
+function displayEdit() {
   formNameText.value = currentNameText.textContent;
   formAboutText.value = currentAboutText.textContent;
+  formEditElement.classList.remove("form_closed");
+  displayModal();
+}
 
+function displayAdd() {
+  formAddElement.classList.remove("form_closed");
+  formPlaceText.textContent = "";
+  formImageLinkText.textContent = "";
+  displayModal();
+}
+
+function displayModal() {
   modalOverlay.classList.add("modal_open");
 }
 
 function hideModal() {
   modalOverlay.classList.remove("modal_open");
+  formEditElement.classList.add("form_closed");
+  formAddElement.classList.add("form_closed");
 }
 
 function handleFormSubmit(evt) {
@@ -64,6 +84,19 @@ function handleFormSubmit(evt) {
   currentNameText.textContent = formNameText.value;
   currentAboutText.textContent = formAboutText.value;
 
+  hideModal();
+}
+
+function handleFormCreate(evt) {
+  evt.preventDefault();
+
+  let createdCard = {
+    name: formPlaceText.value,
+    link: formImageLinkText.value,
+    alt: formPlaceText.value,
+  };
+
+  appendCards(createdCard);
   hideModal();
 }
 
@@ -77,16 +110,21 @@ function getCardElement(data) {
   return cardElement;
 }
 
-function appendCards() {
-  for (card of initialCards) {
-    let newCard = getCardElement(card);
-
-    cardsDisplayed.append(newCard);
-  }
+function loadCards() {
+  initialCards.forEach((card) => {
+    appendCards(card);
+  });
 }
 
-appendCards();
+function appendCards(card) {
+  let newCard = getCardElement(card);
+  cardsDisplayed.append(newCard);
+}
 
-editButton.addEventListener("click", displayModal);
+loadCards();
+
+editButton.addEventListener("click", displayEdit);
+addButton.addEventListener("click", displayAdd);
 closeButton.addEventListener("click", hideModal);
 submitButton.addEventListener("click", handleFormSubmit);
+createButton.addEventListener("click", handleFormCreate);
