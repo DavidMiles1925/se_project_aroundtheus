@@ -21,6 +21,7 @@
       <header class="header">
         <img class="logo" src="./images/logo.svg" alt="Logo" />
       </header>
+
       <main>
         <section class="profile">
           <img
@@ -45,6 +46,7 @@
             />
           </button>
         </section>
+
         <section class="cards">
           <template id="card">
             <article class="card">
@@ -57,19 +59,26 @@
           </template>
         </section>
       </main>
+
       <footer class="footer">
         <p class="footer__text">© 2002 Around The U.S.</p>
       </footer>
+
       <div class="modal">
         <div class="modal__container">
+          <div class="modal__images modal__image_closed">
+            <img class="modal__image" src="" alt="" />
+            <h3 class="modal__image-desctription"></h3>
+          </div>
           <button
             class="modal__close-button"
             type="button"
             name="close"
             aria-label="close"
           ></button>
-          <form class="form form_type_edit-profile form_closed">
-            <h2 class="form__description">Edit Profile</h2>
+
+          <form class="form">
+            <h2 class="form__description"></h2>
             <fieldset class="form__fieldset">
               <input
                 type="text"
@@ -87,33 +96,11 @@
                 placeholder="About Me"
                 required
               />
-              <button type="submit" class="form__submit-button" name="submit">
-                Save
-              </button>
-            </fieldset>
-          </form>
-          <form class="form form_type_add-card form_closed">
-            <h2 class="form__description">New Place</h2>
-            <fieldset class="form__fieldset">
-              <input
-                type="text"
-                class="form__input form__input_type_place"
-                id="place"
-                name="place"
-                placeholder="Title"
-                required
-              />
-              <input
-                type="text"
-                class="form__input form__input_type_image-link"
-                id="image-link"
-                name="image-link"
-                placeholder="Image link"
-                required
-              />
-              <button type="submit" class="form__submit-button" name="create">
-                Create
-              </button>
+              <button
+                type="submit"
+                class="form__submit-button"
+                name="submit"
+              ></button>
             </fieldset>
           </form>
         </div>

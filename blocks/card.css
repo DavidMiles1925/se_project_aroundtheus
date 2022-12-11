@@ -8,6 +8,10 @@
   display: block;
 }
 
+.card__image:hover {
+  cursor: pointer;
+}
+
 .card__info {
   background-color: #fff;
   color: #000;
@@ -41,4 +45,8 @@
 .card__button:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.card_liked {
+  background-image: url("../images/heart-active.svg");
 }

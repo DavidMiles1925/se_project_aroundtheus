@@ -2,69 +2,103 @@ let initialCards = [
   {
     name: "Yosemite Valley",
     link: "./images/yosemite.jpg",
-    alt: "yosemite",
   },
   {
     name: "Lake Louise",
     link: "./images/lake-louise.jpg",
-    alt: "lake louise",
   },
   {
     name: "Bald Mountains",
     link: "./images/bald-mountains.jpg",
-    alt: "bald mountains",
   },
   {
     name: "Latemar",
     link: "./images/latemar.jpg",
-    alt: "latemar",
   },
   {
     name: "Vanoise National Park",
     link: "./images/vanoise.jpg",
-    alt: "vanoise",
   },
   {
     name: "Lago di Braies",
     link: "./images/lago.jpg",
-    alt: "lago",
   },
 ];
 
+const formElement = document.querySelector(".form");
+const formDescription = formElement.querySelector(".form__description");
+
 const modalOverlay = document.querySelector(".modal");
-const formEditElement = document.querySelector(".form_type_edit-profile");
-const formAddElement = document.querySelector(".form_type_add-card");
+const modalContainer = modalOverlay.querySelector(".modal__container");
 const profileElement = document.querySelector(".profile");
+const modalImagesElement = document.querySelector(".modal__images");
 
 const closeButton = modalOverlay.querySelector(".modal__close-button");
-const submitButton = formEditElement.querySelector(".form__submit-button");
-const createButton = formAddElement.querySelector(".form__submit-button");
+const submitButton = formElement.querySelector(".form__submit-button");
 const editButton = profileElement.querySelector(".profile__edit-button");
 const addButton = profileElement.querySelector(".profile__add-button");
 
-const formNameText = formEditElement.querySelector(".form__input_type_name");
-const formAboutText = formEditElement.querySelector(".form__input_type_about");
+const formNameText = formElement.querySelector(".form__input_type_name");
+const formAboutText = formElement.querySelector(".form__input_type_about");
 const currentNameText = profileElement.querySelector(".profile__title");
 const currentAboutText = profileElement.querySelector(".profile__description");
-const formPlaceText = formAddElement.querySelector(".form__input_type_place");
-const formImageLinkText = formAddElement.querySelector(
-  ".form__input_type_image-link"
-);
 
 const cardTemplate = document.querySelector("#card").content;
 const cardsDisplayed = document.querySelector(".cards");
 
+const modalImage = modalImagesElement.querySelector(".modal__image");
+const modalImageDescription = document.querySelector(
+  ".modal__image-desctription"
+);
+
+let formSelector = "";
+
+function clearImage() {
+  formElement.classList.remove("form_closed");
+  modalImagesElement.classList.add("modal__image_closed");
+  modalContainer.classList.remove("modal__container_type_image");
+}
+
 function displayEdit() {
+  clearImage();
   formNameText.value = currentNameText.textContent;
   formAboutText.value = currentAboutText.textContent;
-  formEditElement.classList.remove("form_closed");
+  formSelector = "edit";
+
+  formDescription.textContent = "Edit Profile";
+  formNameText.placeholder = "Name";
+  formAboutText.placeholder = "About Me";
+  submitButton.textContent = "Save";
+  formElement.classList.add("form_open");
   displayModal();
 }
 
 function displayAdd() {
-  formAddElement.classList.remove("form_closed");
-  formPlaceText.textContent = "";
-  formImageLinkText.textContent = "";
+  clearImage();
+  formNameText.value = "";
+  formAboutText.value = "";
+  formSelector = "add";
+
+  formDescription.textContent = "New Place";
+  formNameText.placeholder = "Title";
+  formAboutText.placeholder = "Image link";
+  submitButton.textContent = "Create";
+  formElement.classList.add("form_open");
+  displayModal();
+}
+
+function showModalImage() {
+  modalImage.src = this.src;
+  modalImage.alt = this.alt;
+  modalImagesElement.classList.remove("modal__image_closed");
+  modalImagesElement.classList.add("modal__image_open");
+
+  modalImageDescription.textContent = this.alt;
+
+  modalContainer.classList.add("modal__container_type_image");
+
+  formElement.classList.add("form_closed");
+
   displayModal();
 }
 
@@ -74,30 +108,35 @@ function displayModal() {
 
 function hideModal() {
   modalOverlay.classList.remove("modal_open");
-  formEditElement.classList.add("form_closed");
-  formAddElement.classList.add("form_closed");
+  formElement.classList.remove("form_open");
+  modalImagesElement.classList.remove("modal__image_open");
 }
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
 
-  currentNameText.textContent = formNameText.value;
-  currentAboutText.textContent = formAboutText.value;
+  if ((formSelector = "edit")) {
+    currentNameText.textContent = formNameText.value;
+    currentAboutText.textContent = formAboutText.value;
+  } else if ((formSelector = "add")) {
+    let createdCard = {
+      name: formNameText.value,
+      link: formAboutText.value,
+      alt: formNameText.value,
+    };
+
+    prependCards(createdCard);
+  }
 
   hideModal();
 }
 
 function handleFormCreate(evt) {
   evt.preventDefault();
+}
 
-  let createdCard = {
-    name: formPlaceText.value,
-    link: formImageLinkText.value,
-    alt: formPlaceText.value,
-  };
-
-  appendCards(createdCard);
-  hideModal();
+function likeCard() {
+  this.classList.add("card_liked");
 }
 
 function getCardElement(data) {
@@ -105,9 +144,25 @@ function getCardElement(data) {
 
   cardElement.querySelector(".card__title").textContent = data["name"];
   cardElement.querySelector(".card__image").src = data["link"];
-  cardElement.querySelector(".card__image").alt = data["alt"];
+  cardElement.querySelector(".card__image").alt = data["name"];
+
+  const heartButton = cardElement.querySelector(".card__button");
+  heartButton.addEventListener("click", likeCard);
+
+  const imageButton = cardElement.querySelector(".card__image");
+  imageButton.addEventListener("click", showModalImage);
 
   return cardElement;
+}
+
+function prependCards(card) {
+  let newCard = getCardElement(card);
+  cardsDisplayed.prepend(newCard);
+}
+
+function appendCards(card) {
+  let newCard = getCardElement(card);
+  cardsDisplayed.append(newCard);
 }
 
 function loadCards() {
@@ -116,15 +171,9 @@ function loadCards() {
   });
 }
 
-function appendCards(card) {
-  let newCard = getCardElement(card);
-  cardsDisplayed.append(newCard);
-}
-
 loadCards();
 
 editButton.addEventListener("click", displayEdit);
 addButton.addEventListener("click", displayAdd);
 closeButton.addEventListener("click", hideModal);
 submitButton.addEventListener("click", handleFormSubmit);
-createButton.addEventListener("click", handleFormCreate);
