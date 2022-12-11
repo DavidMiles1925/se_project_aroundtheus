@@ -66,10 +66,10 @@ function displayModal() {
 function hideModal() {
   modalOverlay.classList.remove("modal_open");
   formElement.classList.remove("form_open");
-  modalImagesElement.classList.remove("modal__image_open");
+  modalImagesElement.classList.remove("modal__image_type_open");
   setTimeout(() => {
     modalContainer.classList.remove("modal__container_type_image");
-    modalImagesElement.classList.add("modal__image_closed");
+    modalImagesElement.classList.add("modal__image_type_closed");
     formElement.classList.remove("form_closed");
   }, 500);
 }
@@ -118,8 +118,8 @@ function displayModalImage() {
   modalImageDescription.textContent = this.alt;
 
   modalContainer.classList.add("modal__container_type_image");
-  modalImagesElement.classList.add("modal__image_open");
-  modalImagesElement.classList.remove("modal__image_closed");
+  modalImagesElement.classList.add("modal__image_type_open");
+  modalImagesElement.classList.remove("modal__image_type_closed");
 
   formElement.classList.add("form_closed");
 
