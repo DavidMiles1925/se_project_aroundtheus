@@ -55,55 +55,8 @@ const modalImageDescription = document.querySelector(
 
 let formSelector = "";
 
-function clearImage() {
+function removePreload() {
   bodyElement.classList.remove("preload");
-  formElement.classList.remove("form_closed");
-  modalImagesElement.classList.add("modal__image_closed");
-  modalContainer.classList.remove("modal__container_type_image");
-}
-
-function displayEdit() {
-  clearImage();
-  formNameText.value = currentNameText.textContent;
-  formAboutText.value = currentAboutText.textContent;
-  formSelector = "edit";
-
-  formDescription.textContent = "Edit Profile";
-  formNameText.placeholder = "Name";
-  formAboutText.placeholder = "About Me";
-  submitButton.textContent = "Save";
-  formElement.classList.add("form_open");
-  displayModal();
-}
-
-function displayAdd() {
-  clearImage();
-  formNameText.value = "";
-  formAboutText.value = "";
-  formSelector = "add";
-
-  formDescription.textContent = "New Place";
-  formNameText.placeholder = "Title";
-  formAboutText.placeholder = "Image link";
-  submitButton.textContent = "Create";
-  formElement.classList.add("form_open");
-  displayModal();
-}
-
-function showModalImage() {
-  bodyElement.classList.remove("preload");
-  modalImage.src = this.src;
-  modalImage.alt = this.alt;
-  modalImagesElement.classList.remove("modal__image_closed");
-  modalImagesElement.classList.add("modal__image_open");
-
-  modalImageDescription.textContent = this.alt;
-
-  modalContainer.classList.add("modal__container_type_image");
-
-  formElement.classList.add("form_closed");
-
-  displayModal();
 }
 
 function displayModal() {
@@ -114,6 +67,63 @@ function hideModal() {
   modalOverlay.classList.remove("modal_open");
   formElement.classList.remove("form_open");
   modalImagesElement.classList.remove("modal__image_open");
+  setTimeout(() => {
+    modalContainer.classList.remove("modal__container_type_image");
+    modalImagesElement.classList.add("modal__image_closed");
+    formElement.classList.remove("form_closed");
+  }, 500);
+}
+
+function displayEdit() {
+  removePreload();
+
+  formNameText.value = currentNameText.textContent;
+  formAboutText.value = currentAboutText.textContent;
+
+  formSelector = "edit";
+
+  formDescription.textContent = "Edit Profile";
+  formNameText.placeholder = "Name";
+  formAboutText.placeholder = "About Me";
+  submitButton.textContent = "Save";
+
+  formElement.classList.add("form_open");
+
+  displayModal();
+}
+
+function displayAdd() {
+  removePreload();
+
+  formNameText.value = "";
+  formAboutText.value = "";
+
+  formSelector = "add";
+
+  formDescription.textContent = "New Place";
+  formNameText.placeholder = "Title";
+  formAboutText.placeholder = "Image link";
+  submitButton.textContent = "Create";
+
+  formElement.classList.add("form_open");
+
+  displayModal();
+}
+
+function displayModalImage() {
+  removePreload();
+
+  modalImage.src = this.src;
+  modalImage.alt = this.alt;
+  modalImageDescription.textContent = this.alt;
+
+  modalContainer.classList.add("modal__container_type_image");
+  modalImagesElement.classList.add("modal__image_open");
+  modalImagesElement.classList.remove("modal__image_closed");
+
+  formElement.classList.add("form_closed");
+
+  displayModal();
 }
 
 function handleFormSubmit(evt) {
@@ -124,7 +134,7 @@ function handleFormSubmit(evt) {
     currentNameText.textContent = formNameText.value;
     currentAboutText.textContent = formAboutText.value;
   } else if (formSelector === "add") {
-    let createdCard = {
+    const createdCard = {
       name: formNameText.value,
       link: formAboutText.value,
       alt: formNameText.value,
@@ -136,12 +146,19 @@ function handleFormSubmit(evt) {
   hideModal();
 }
 
-function handleFormCreate(evt) {
-  evt.preventDefault();
-}
+function assignCardButtons(element) {
+  const heartButton = element.querySelector(".card__like-button");
+  heartButton.addEventListener("click", function () {
+    this.classList.toggle("card_liked");
+  });
 
-function likeCard() {
-  this.classList.add("card_liked");
+  const deleteButton = element.querySelector(".card__delete-button");
+  deleteButton.addEventListener("click", function () {
+    this.closest(".card").remove();
+  });
+
+  const imageButton = element.querySelector(".card__image");
+  imageButton.addEventListener("click", displayModalImage);
 }
 
 function getCardElement(data) {
@@ -151,32 +168,28 @@ function getCardElement(data) {
   cardElement.querySelector(".card__image").src = data["link"];
   cardElement.querySelector(".card__image").alt = data["name"];
 
-  const heartButton = cardElement.querySelector(".card__button");
-  heartButton.addEventListener("click", likeCard);
-
-  const imageButton = cardElement.querySelector(".card__image");
-  imageButton.addEventListener("click", showModalImage);
+  assignCardButtons(cardElement);
 
   return cardElement;
 }
 
 function prependCards(card) {
-  let newCard = getCardElement(card);
+  const newCard = getCardElement(card);
   cardsDisplayed.prepend(newCard);
 }
 
 function appendCards(card) {
-  let newCard = getCardElement(card);
+  const newCard = getCardElement(card);
   cardsDisplayed.append(newCard);
 }
 
-function loadCards() {
-  initialCards.forEach((card) => {
+function loadCards(cards) {
+  cards.forEach((card) => {
     appendCards(card);
   });
 }
 
-loadCards();
+loadCards(initialCards);
 
 editButton.addEventListener("click", displayEdit);
 addButton.addEventListener("click", displayAdd);
