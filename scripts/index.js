@@ -72,7 +72,6 @@ function removePreload() {
 
 function displayModal(modal) {
   modal.classList.add("modal_open");
-  console.log(modal.classList);
 }
 
 function hideModal(modal) {
