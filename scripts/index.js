@@ -27,9 +27,9 @@ const initialCards = [
 
 const bodyElement = document.querySelector(".body");
 
-const modalProfile = document.querySelector(".modal__profile");
-const modalAddCard = document.querySelector(".modal__add-card");
-const modalDisplayImage = document.querySelector(".modal__display-image");
+const modalProfile = document.querySelector(".modal_profile");
+const modalAddCard = document.querySelector(".modal_add-card");
+const modalDisplayImage = document.querySelector(".modal_display-image");
 
 const formProfileElement = modalProfile.querySelector(".form");
 const formAddCardElement = modalAddCard.querySelector(".form");
@@ -113,6 +113,7 @@ function handleProfileSubmit(evt) {
   evt.preventDefault();
   currentNameText.textContent = formNameText.value;
   currentAboutText.textContent = formAboutText.value;
+  hideModal();
 }
 
 function handleAddCardSubmit(evt) {
