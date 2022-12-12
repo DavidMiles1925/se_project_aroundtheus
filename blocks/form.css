@@ -1,16 +1,5 @@
 .form {
   padding: 34px 36px 36px;
-  visibility: collapse;
-  transition: visibility 0s 0.5s, opacity 0.5s linear;
-}
-
-.form_open {
-  visibility: visible;
-  transition: visibility 0s, opacity 0.5s linear;
-}
-
-.form_closed {
-  display: none;
 }
 
 .form__description {

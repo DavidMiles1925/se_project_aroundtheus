@@ -65,21 +65,16 @@
         <p class="footer__text">© 2002 Around The U.S.</p>
       </footer>
 
-      <div class="modal">
+      <div class="modal modal__profile">
         <div class="modal__container">
-          <div class="modal__images modal__images_type_closed">
-            <img class="modal__image" src="#" alt="#" />
-            <h3 class="modal__image-desctription"></h3>
-          </div>
           <button
             class="modal__close-button"
             type="button"
             name="close"
             aria-label="close"
           ></button>
-
           <form class="form">
-            <h2 class="form__description"></h2>
+            <h2 class="form__description">Edit Profile</h2>
             <fieldset class="form__fieldset">
               <input
                 type="text"
@@ -97,13 +92,59 @@
                 placeholder="About Me"
                 required
               />
-              <button
-                type="submit"
-                class="form__submit-button"
-                name="submit"
-              ></button>
+              <button type="submit" class="form__submit-button" name="submit">
+                Save
+              </button>
             </fieldset>
           </form>
+        </div>
+      </div>
+
+      <div class="modal modal__add-card">
+        <div class="modal__container">
+          <button
+            class="modal__close-button"
+            type="button"
+            name="close"
+            aria-label="close"
+          ></button>
+          <form class="form">
+            <h2 class="form__description">New Place</h2>
+            <fieldset class="form__fieldset">
+              <input
+                type="text"
+                class="form__input form__input_type_place"
+                id="place"
+                name="place"
+                placeholder="Title"
+                required
+              />
+              <input
+                type="text"
+                class="form__input form__input_type_link"
+                id="link"
+                name="link"
+                placeholder="Image link"
+                required
+              />
+              <button type="submit" class="form__submit-button" name="create">
+                Save
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal modal__display-image">
+        <div class="modal__container modal__container_type_image">
+          <img class="modal__image" src="#" alt="#" />
+          <h3 class="modal__image-desctription">Header</h3>
+          <button
+            class="modal__close-button"
+            type="button"
+            name="close"
+            aria-label="close"
+          ></button>
         </div>
       </div>
     </div>

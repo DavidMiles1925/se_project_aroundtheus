@@ -31,6 +31,7 @@
 
 .modal__container_type_image {
   display: flex;
+  flex-direction: column;
   max-width: 100%;
   width: auto;
   background-color: transparent;
@@ -38,16 +39,6 @@
 
 .modal__image {
   height: 540px;
-  transition: visibility 0s 0.5s, opacity 0.5s linear;
-}
-
-.modal__images_type_open {
-  visibility: visible;
-  transition: visibility 0s, opacity 0.5s linear;
-}
-
-.modal__images_type_closed {
-  display: none;
 }
 
 .modal__image-desctription {
