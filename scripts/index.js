@@ -75,10 +75,8 @@ function displayModal(modal) {
   console.log(modal.classList);
 }
 
-function hideModal() {
-  modalProfile.classList.remove("modal_open");
-  modalAddCard.classList.remove("modal_open");
-  modalDisplayImage.classList.remove("modal_open");
+function hideModal(modal) {
+  modal.classList.remove("modal_open");
 }
 
 function fillProfileForm() {
@@ -113,7 +111,7 @@ function handleProfileSubmit(evt) {
   evt.preventDefault();
   currentNameText.textContent = formNameText.value;
   currentAboutText.textContent = formAboutText.value;
-  hideModal();
+  hideModal(modalProfile);
 }
 
 function handleAddCardSubmit(evt) {
@@ -124,7 +122,7 @@ function handleAddCardSubmit(evt) {
     alt: formTitleText.value,
   };
   prependCard(createdCard);
-  hideModal();
+  hideModal(modalAddCard);
 }
 
 function assignCardButtons(element) {
@@ -176,8 +174,14 @@ loadCards(initialCards);
 
 editButton.addEventListener("click", displayEdit);
 addButton.addEventListener("click", displayAdd);
-closeProfileButton.addEventListener("click", hideModal);
-closeAddCardButton.addEventListener("click", hideModal);
-closeImageButton.addEventListener("click", hideModal);
-submitProfileButton.addEventListener("click", handleProfileSubmit);
-submitAddCardButton.addEventListener("click", handleAddCardSubmit);
+closeProfileButton.addEventListener("click", function () {
+  hideModal(modalProfile);
+});
+closeAddCardButton.addEventListener("click", function () {
+  hideModal(modalAddCard);
+});
+closeImageButton.addEventListener("click", function () {
+  hideModal(modalDisplayImage);
+});
+formProfileElement.addEventListener("submit", handleProfileSubmit);
+formAddCardElement.addEventListener("submit", handleAddCardSubmit);
