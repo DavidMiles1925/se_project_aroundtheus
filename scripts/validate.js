@@ -8,27 +8,33 @@ const configValidate = {
   errorClass: "form__error_visible",
 };
 
-function showInputError(formElement, inputElement, errorMessage) {
-  /*Need to add error spans to HTML*/
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(inputElement);
+function showInputError(fieldsetElement, inputElement, errorMessage) {
+  const errorElement = fieldsetElement.querySelector(
+    `.${inputElement.id}-error`
+  );
   inputElement.classList.add(configValidate.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(configValidate.errorClass);
 }
 
-function hideInputError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+function hideInputError(fieldsetElement, inputElement) {
+  const errorElement = fieldsetElement.querySelector(
+    `.${inputElement.id}-error`
+  );
   inputElement.classList.remove(configValidate.inputErrorClass);
   errorElement.classList.remove(configValidate.inputErrorClass);
   errorElement.textContent = "";
 }
 
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity(fieldsetElement, inputElement) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      fieldsetElement,
+      inputElement,
+      inputElement.validationMessage
+    );
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(fieldsetElement, inputElement);
   }
 }
 
@@ -39,7 +45,6 @@ function hasInvalidInput(inputList) {
 }
 
 function toggleButtonState(inputList, buttonElement) {
-  console.log(hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute("disabled", "disabled");
     buttonElement.classList.add(configValidate.inactiveButtonClass);
@@ -49,11 +54,11 @@ function toggleButtonState(inputList, buttonElement) {
   }
 }
 
-function setEventListeners(formElement) {
+function setEventListeners(fieldsetElement) {
   const inputList = Array.from(
-    formElement.querySelectorAll(configValidate.inputSelector)
+    fieldsetElement.querySelectorAll(configValidate.inputSelector)
   );
-  const buttonElement = formElement.querySelector(
+  const buttonElement = fieldsetElement.querySelector(
     configValidate.submitButtonSelector
   );
 
@@ -61,14 +66,13 @@ function setEventListeners(formElement) {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(fieldsetElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
   });
 }
 
 function enableValidation(configValidate) {
-  console.log("enable validation");
   const formList = Array.from(
     document.querySelectorAll(configValidate.formSelector)
   );
@@ -81,8 +85,29 @@ function enableValidation(configValidate) {
       formElement.querySelectorAll(configValidate.formFieldsetSelector)
     );
 
-    fieldsetList.forEach((fieldset) => {
-      setEventListeners(fieldset);
+    fieldsetList.forEach((fieldsetElement) => {
+      setEventListeners(fieldsetElement);
+    });
+  });
+}
+
+export function resetValidation() {
+  const formList = Array.from(
+    document.querySelectorAll(configValidate.formSelector)
+  );
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+    const inputList = Array.from(
+      formElement.querySelectorAll(configValidate.inputSelector)
+    );
+    inputList.forEach((inputElement) => {
+      const errorElement = formElement.querySelector(
+        `.${inputElement.id}-error`
+      );
+      errorElement.classList.remove(configValidate.errorClass);
+      inputElement.classList.remove(configValidate.inputErrorClass);
     });
   });
 }

@@ -1,3 +1,5 @@
+import { resetValidation } from "./validate.js";
+
 const configClose = {
   closeButtonSelector: ".modal__close-button",
   modalOverlaySelector: ".modal",
@@ -73,6 +75,7 @@ function removePreload() {
 
 function displayModal(modal) {
   modal.classList.add("modal_open");
+  resetValidation();
 }
 
 function hideModal(modal) {
