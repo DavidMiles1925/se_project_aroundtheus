@@ -60,6 +60,26 @@ A for...of loop was used to render cards based on a template instead of hardcodi
 
 ![Loops](./images/readme_loops.png)
 
+### Form Validaton
+
+**Checking "type", "minlength", "maxlength"**
+
+Attributes were set to regulate the data that could be entered into input fields.
+
+[Validation](./images/readme_input-validation.png)
+
+**Custom error messages and styling**
+
+Default browser behaivior was prevented to allow for more custom error messages to be displayed directly underneath input fields.
+
+[Errors](./images/readme_error-messages.png)
+
+**Dynamic Form Validation**
+
+A seperate "validate.js" file was created with dynamic code designed to be reused across multiple projects. A configuration object was included for increased ease of portability.
+
+[Config](./images/readme_config.png)
+
 ### Github Publication
 
-The project was published on GitHub pages so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/)
+The project was published on GitHub pages so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
