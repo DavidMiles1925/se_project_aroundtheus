@@ -1,3 +1,9 @@
+const configClose = {
+  closeButtonSelector: ".modal__close-button",
+  modalOverlaySelector: ".modal",
+  modalContainerList: ".modal__container",
+};
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -36,11 +42,6 @@ const formAddCardElement = modalAddCard.querySelector(".form");
 
 const profileElement = document.querySelector(".profile");
 
-const closeProfileButton = modalProfile.querySelector(".modal__close-button");
-const closeAddCardButton = modalAddCard.querySelector(".modal__close-button");
-const closeImageButton = modalDisplayImage.querySelector(
-  ".modal__close-button"
-);
 const submitProfileButton = formProfileElement.querySelector(
   ".form__submit-button"
 );
@@ -169,18 +170,51 @@ function loadCards(cards) {
   });
 }
 
-loadCards(initialCards);
+function setCloseListeners(config) {
+  const closeButtonList = Array.from(
+    document.querySelectorAll(config.closeButtonSelector)
+  );
+  const closeModalList = Array.from(
+    document.querySelectorAll(config.modalOverlaySelector)
+  );
+  const modalContainerList = Array.from(
+    document.querySelectorAll(config.modalContainerList)
+  );
 
-editButton.addEventListener("click", displayEdit);
-addButton.addEventListener("click", displayAdd);
-closeProfileButton.addEventListener("click", function () {
-  hideModal(modalProfile);
-});
-closeAddCardButton.addEventListener("click", function () {
-  hideModal(modalAddCard);
-});
-closeImageButton.addEventListener("click", function () {
-  hideModal(modalDisplayImage);
-});
-formProfileElement.addEventListener("submit", handleProfileSubmit);
-formAddCardElement.addEventListener("submit", handleAddCardSubmit);
+  modalContainerList.forEach((container) => {
+    container.addEventListener("mousedown", function (evt) {
+      evt.stopPropagation();
+    });
+  });
+
+  closeButtonList.forEach((button) => {
+    button.addEventListener("click", function () {
+      hideModal(button.closest(config.modalOverlaySelector));
+    });
+  });
+
+  closeModalList.forEach((modal) => {
+    modal.addEventListener("mousedown", function () {
+      hideModal(modal);
+    });
+  });
+
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closeModalList.forEach((modal) => {
+        hideModal(modal);
+      });
+    }
+  });
+}
+
+function setPageListeners() {
+  editButton.addEventListener("click", displayEdit);
+  addButton.addEventListener("click", displayAdd);
+  formProfileElement.addEventListener("submit", handleProfileSubmit);
+  formAddCardElement.addEventListener("submit", handleAddCardSubmit);
+}
+
+loadCards(initialCards);
+setCloseListeners(configClose);
+setPageListeners();

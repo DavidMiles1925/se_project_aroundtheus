@@ -55,6 +55,9 @@
 }
 
 .profile__add-button {
+  background-image: url(../images/plus-sign.svg);
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: transparent;
   color: #fff;
   box-sizing: border-box;
@@ -72,11 +75,6 @@
 .profile__add-button:hover {
   opacity: 0.6;
   cursor: pointer;
-}
-
-.profile__add-icon {
-  max-width: 22px;
-  padding: 100% 0;
 }
 
 @media screen and (max-width: 1120px) {
@@ -135,12 +133,9 @@
   }
 
   .profile__add-button {
+    background-size: 16px;
     max-width: 282px;
     margin: 36px 0 0;
-  }
-
-  .profile__add-icon {
-    max-width: 16px;
   }
 }
 

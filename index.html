@@ -38,13 +38,7 @@
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button">
-            <img
-              src="./images/plus-sign.svg"
-              class="profile__add-icon"
-              alt="Add Icon"
-            />
-          </button>
+          <button class="profile__add-button" type="button"></button>
         </section>
 
         <section class="cards">
@@ -78,20 +72,26 @@
             <fieldset class="form__fieldset">
               <input
                 type="text"
+                minlength="2"
+                maxlength="40"
                 class="form__input form__input_type_name"
-                id="name"
+                id="form__name"
                 name="name"
                 placeholder="Name"
                 required
               />
+              <span class="form__name-error"></span>
               <input
                 type="text"
+                minlength="2"
+                maxlength="200"
                 class="form__input form__input_type_about"
-                id="about"
+                id="form__about"
                 name="about"
                 placeholder="About Me"
                 required
               />
+              <span class="form__about-error"></span>
               <button type="submit" class="form__submit-button" name="submit">
                 Save
               </button>
@@ -113,20 +113,24 @@
             <fieldset class="form__fieldset">
               <input
                 type="text"
+                minlength="1"
+                maxlength="30"
                 class="form__input form__input_type_place"
-                id="place"
+                id="form__place"
                 name="place"
                 placeholder="Title"
                 required
               />
+              <span class="form__place-error"></span>
               <input
-                type="text"
+                type="url"
                 class="form__input form__input_type_link"
-                id="link"
+                id="form__link"
                 name="link"
                 placeholder="Image link"
                 required
               />
+              <span class="form__link-error"></span>
               <button type="submit" class="form__submit-button" name="create">
                 Save
               </button>
@@ -149,5 +153,6 @@
       </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
