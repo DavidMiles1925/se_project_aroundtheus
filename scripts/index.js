@@ -68,13 +68,29 @@ function removePreload() {
   bodyElement.classList.remove("preload");
 }
 
+function hideModalOnRemoteClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    hideModal(evt.target);
+  }
+}
+
+function hideModalOnEsape(evt) {
+  if (evt.key === "Escape") {
+    const openModal = document.querySelector(".modal_open");
+    hideModal(openModal);
+  }
+}
+
 function displayModal(modal) {
   modal.classList.add("modal_open");
+  document.addEventListener("keydown", hideModalOnEsape);
+  modal.addEventListener("mousedown", hideModalOnRemoteClick);
 }
 
 function hideModal(modal) {
   modal.classList.remove("modal_open");
-  resetValidation(configValidate);
+  document.removeEventListener("keydown", hideModalOnEsape);
+  modal.removeEventListener("mousedown", hideModalOnRemoteClick);
 }
 
 function fillProfileForm() {
@@ -86,12 +102,14 @@ function displayEdit() {
   removePreload();
   fillProfileForm();
   displayModal(modalProfile);
+  resetValidation(configValidate);
 }
 
 function displayAdd() {
   removePreload();
   formAddCardElement.reset();
   displayModal(modalAddCard);
+  resetValidation(configValidate);
 }
 
 function displayImage() {
@@ -179,30 +197,10 @@ function setCloseListeners(config) {
     document.querySelectorAll(config.modalContainerList)
   );
 
-  modalContainerList.forEach((container) => {
-    container.addEventListener("mousedown", function (evt) {
-      evt.stopPropagation();
-    });
-  });
-
   closeButtonList.forEach((button) => {
     button.addEventListener("click", function () {
       hideModal(button.closest(config.modalOverlaySelector));
     });
-  });
-
-  closeModalList.forEach((modal) => {
-    modal.addEventListener("mousedown", function () {
-      hideModal(modal);
-    });
-  });
-
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      closeModalList.forEach((modal) => {
-        hideModal(modal);
-      });
-    }
   });
 }
 
