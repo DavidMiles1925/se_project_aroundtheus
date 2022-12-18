@@ -1,4 +1,4 @@
-const configValidate = {
+export const configValidate = {
   formSelector: ".form",
   formFieldsetSelector: ".form__fieldset",
   inputSelector: ".form__input",
@@ -8,33 +8,34 @@ const configValidate = {
   errorClass: "form__error_visible",
 };
 
-function showInputError(fieldsetElement, inputElement, errorMessage) {
+function showInputError(fieldsetElement, inputElement, errorMessage, config) {
   const errorElement = fieldsetElement.querySelector(
     `.${inputElement.id}-error`
   );
-  inputElement.classList.add(configValidate.inputErrorClass);
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(configValidate.errorClass);
+  errorElement.classList.add(config.errorClass);
 }
 
-function hideInputError(fieldsetElement, inputElement) {
+function hideInputError(fieldsetElement, inputElement, config) {
   const errorElement = fieldsetElement.querySelector(
     `.${inputElement.id}-error`
   );
-  inputElement.classList.remove(configValidate.inputErrorClass);
-  errorElement.classList.remove(configValidate.inputErrorClass);
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
 }
 
-function checkInputValidity(fieldsetElement, inputElement) {
+function checkInputValidity(fieldsetElement, inputElement, config) {
   if (!inputElement.validity.valid) {
     showInputError(
       fieldsetElement,
       inputElement,
-      inputElement.validationMessage
+      inputElement.validationMessage,
+      config
     );
   } else {
-    hideInputError(fieldsetElement, inputElement);
+    hideInputError(fieldsetElement, inputElement, config);
   }
 }
 
@@ -44,70 +45,71 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute("disabled", "disabled");
-    buttonElement.classList.add(configValidate.inactiveButtonClass);
+    buttonElement.classList.add(config.inactiveButtonClass);
   } else {
-    buttonElement.removeAttribute("disabled", "disabled");
-    buttonElement.classList.remove(configValidate.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled");
+    buttonElement.classList.remove(config.inactiveButtonClass);
   }
 }
 
-function setEventListeners(fieldsetElement) {
+function setEventListeners(fieldsetElement, config) {
   const inputList = Array.from(
-    fieldsetElement.querySelectorAll(configValidate.inputSelector)
+    fieldsetElement.querySelectorAll(config.inputSelector)
   );
   const buttonElement = fieldsetElement.querySelector(
-    configValidate.submitButtonSelector
+    config.submitButtonSelector
   );
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(fieldsetElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(fieldsetElement, inputElement, config);
+      toggleButtonState(inputList, buttonElement, config);
     });
   });
 }
 
-function enableValidation(configValidate) {
-  const formList = Array.from(
-    document.querySelectorAll(configValidate.formSelector)
-  );
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
 
     const fieldsetList = Array.from(
-      formElement.querySelectorAll(configValidate.formFieldsetSelector)
+      formElement.querySelectorAll(config.formFieldsetSelector)
     );
 
     fieldsetList.forEach((fieldsetElement) => {
-      setEventListeners(fieldsetElement);
+      setEventListeners(fieldsetElement, config);
     });
   });
 }
 
-export function resetValidation() {
-  const formList = Array.from(
-    document.querySelectorAll(configValidate.formSelector)
+export function resetValidation(config) {
+  const fieldsetList = Array.from(
+    document.querySelectorAll(config.formFieldsetSelector)
   );
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();
-    });
+  fieldsetList.forEach((fieldsetElement) => {
+    const buttonElement = fieldsetElement.querySelector(
+      config.submitButtonSelector
+    );
+
+    buttonElement.classList.add(config.inactiveButtonClass);
+
     const inputList = Array.from(
-      formElement.querySelectorAll(configValidate.inputSelector)
+      fieldsetElement.querySelectorAll(config.inputSelector)
     );
     inputList.forEach((inputElement) => {
-      const errorElement = formElement.querySelector(
+      const errorElement = fieldsetElement.querySelector(
         `.${inputElement.id}-error`
       );
-      errorElement.classList.remove(configValidate.errorClass);
-      inputElement.classList.remove(configValidate.inputErrorClass);
+      errorElement.classList.remove(config.errorClass);
+      inputElement.classList.remove(config.inputErrorClass);
     });
   });
 }

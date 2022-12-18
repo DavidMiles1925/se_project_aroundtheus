@@ -1,4 +1,5 @@
 import { resetValidation } from "./validate.js";
+import { configValidate } from "./validate.js";
 
 const configClose = {
   closeButtonSelector: ".modal__close-button",
@@ -44,12 +45,6 @@ const formAddCardElement = modalAddCard.querySelector(".form");
 
 const profileElement = document.querySelector(".profile");
 
-const submitProfileButton = formProfileElement.querySelector(
-  ".form__submit-button"
-);
-const submitAddCardButton = formAddCardElement.querySelector(
-  ".form__submit-button"
-);
 const editButton = profileElement.querySelector(".profile__edit-button");
 const addButton = profileElement.querySelector(".profile__add-button");
 
@@ -75,11 +70,11 @@ function removePreload() {
 
 function displayModal(modal) {
   modal.classList.add("modal_open");
-  resetValidation();
 }
 
 function hideModal(modal) {
   modal.classList.remove("modal_open");
+  resetValidation(configValidate);
 }
 
 function fillProfileForm() {
@@ -216,8 +211,8 @@ function setPageListeners() {
   addButton.addEventListener("click", displayAdd);
   formProfileElement.addEventListener("submit", handleProfileSubmit);
   formAddCardElement.addEventListener("submit", handleAddCardSubmit);
+  setCloseListeners(configClose);
 }
 
 loadCards(initialCards);
-setCloseListeners(configClose);
 setPageListeners();
