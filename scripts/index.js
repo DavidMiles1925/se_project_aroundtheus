@@ -187,15 +187,9 @@ function loadCards(cards) {
 }
 
 function setCloseListeners(config) {
-  const closeButtonList = Array.from(
-    document.querySelectorAll(config.closeButtonSelector)
-  );
-  const closeModalList = Array.from(
-    document.querySelectorAll(config.modalOverlaySelector)
-  );
-  const modalContainerList = Array.from(
-    document.querySelectorAll(config.modalContainerList)
-  );
+  const closeButtonList = [
+    ...document.querySelectorAll(config.closeButtonSelector),
+  ];
 
   closeButtonList.forEach((button) => {
     button.addEventListener("click", function () {
