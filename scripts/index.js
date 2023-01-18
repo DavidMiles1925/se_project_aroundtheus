@@ -1,5 +1,6 @@
-import { resetValidation } from "./validate.js";
-import { configValidate } from "./validate.js";
+import { resetValidation, configValidate } from "./validate.js";
+import { Card } from "./card.js";
+import * as utils from "./utils.js";
 
 const configClose = {
   closeButtonSelector: ".modal__close-button",
@@ -74,7 +75,7 @@ function hideModalOnRemoteClick(evt) {
   }
 }
 
-function hideModalOnEsape(evt) {
+function hideModalOnEscape(evt) {
   if (evt.key === "Escape") {
     const openModal = document.querySelector(".modal_open");
     hideModal(openModal);
@@ -83,13 +84,13 @@ function hideModalOnEsape(evt) {
 
 function displayModal(modal) {
   modal.classList.add("modal_open");
-  document.addEventListener("keydown", hideModalOnEsape);
+  document.addEventListener("keydown", hideModalOnEscape);
   modal.addEventListener("mousedown", hideModalOnRemoteClick);
 }
 
 function hideModal(modal) {
   modal.classList.remove("modal_open");
-  document.removeEventListener("keydown", hideModalOnEsape);
+  document.removeEventListener("keydown", hideModalOnEscape);
   modal.removeEventListener("mousedown", hideModalOnRemoteClick);
 }
 
