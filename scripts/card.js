@@ -36,11 +36,9 @@ class Card {
 
   _assignCardButtons() {
     this._heartButton.addEventListener("click", () => this._handleLikeButton());
-
     this._deleteButton.addEventListener("click", () =>
       this._handleDeleteButton()
     );
-
     this._imageButton.addEventListener("click", () =>
       this._handleDisplayImage()
     );
