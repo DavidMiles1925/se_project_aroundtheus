@@ -25,28 +25,28 @@ const configClose = {
 
 const initialCards = [
   {
-    name: "Yosemite Valley",
-    link: "../images/yosemite.jpg",
+    name: "Boulder, CO",
+    link: "../images/Boulder.jpg",
   },
   {
-    name: "Lake Louise",
-    link: "../images/lake-louise.jpg",
+    name: "Doheny Beach, CA",
+    link: "../images/Doheny.jpg",
   },
   {
-    name: "Bald Mountains",
-    link: "../images/bald-mountains.jpg",
+    name: "Eureka Springs, AK",
+    link: "../images/Eureka.jpg",
   },
   {
-    name: "Latemar",
-    link: "../images/latemar.jpg",
+    name: "Fort Lauderdale, FL",
+    link: "../images/Lauderdale.jpg",
   },
   {
-    name: "Vanoise National Park",
-    link: "../images/vanoise.jpg",
+    name: "Melvern Lake, KS",
+    link: "../images/Melvern.jpg",
   },
   {
-    name: "Lago di Braies",
-    link: "../images/lago.jpg",
+    name: "Royal Gorge, CO",
+    link: "../images/Royal.jpg",
   },
 ];
 

@@ -1,11 +1,5 @@
 import { removePreload, displayModal } from "./utils.js";
 
-const modalDisplayImage = document.querySelector(".modal_display-image");
-const modalImage = modalDisplayImage.querySelector(".modal__image");
-const modalImageDescription = modalDisplayImage.querySelector(
-  ".modal__image-desctription"
-);
-
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -47,7 +41,9 @@ class Card {
       this._handleDeleteButton()
     );
 
-    this._imageButton.addEventListener("click", () => this._displayImage());
+    this._imageButton.addEventListener("click", () =>
+      this._handleDisplayImage()
+    );
   }
 
   _handleLikeButton() {
@@ -58,15 +54,20 @@ class Card {
     this._deleteButton.closest(".card").remove();
   }
 
-  _displayImage() {
+  _handleDisplayImage() {
     removePreload();
 
-    const modalImageAltText = this._alt;
-    modalImage.src = this._link;
-    modalImage.alt = modalImageAltText;
-    modalImageDescription.textContent = modalImageAltText;
+    this._modalDisplayImage = document.querySelector(".modal_display-image");
+    this._modalImage = this._modalDisplayImage.querySelector(".modal__image");
+    this._modalImageDescription = this._modalDisplayImage.querySelector(
+      ".modal__image-desctription"
+    );
 
-    displayModal(modalDisplayImage);
+    this._modalImage.src = this._link;
+    this._modalImage.alt = this._alt;
+    this._modalImageDescription.textContent = this._name;
+
+    displayModal(this._modalDisplayImage);
   }
 }
 
