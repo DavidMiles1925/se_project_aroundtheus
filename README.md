@@ -2,6 +2,18 @@
 
 ## Project Features:
 
+### Object Oriented Programming
+
+**Modules**
+
+Seperate files were encapsulated and implemented using "import" and "export" functionality.
+
+**Classes**
+
+"FormValidator" and "Card" classes were implemented for site functionality.
+
+![Classes](./images/readme_classes.png)
+
 ### Responsive Web Design
 
 **Flexbox and Grid Layout**
