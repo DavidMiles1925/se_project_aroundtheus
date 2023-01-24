@@ -1,46 +1,73 @@
-export class Card {
-  constructor(data) {
+import { removePreload, displayModal } from "./utils.js";
+
+const modalDisplayImage = document.querySelector(".modal_display-image");
+const modalImage = modalDisplayImage.querySelector(".modal__image");
+const modalImageDescription = modalDisplayImage.querySelector(
+  ".modal__image-desctription"
+);
+
+class Card {
+  constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
+
+    this._cardSelector = cardSelector;
   }
 
-  _getCardElement() {
-    const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-    const cardImage = cardElement.querySelector(".card__image");
-    const cardText = cardElement.querySelector(".card__title");
-
-    cardText.textContent = this._name;
-    cardImage.src = this._link;
-    cardImage.alt = this._alt;
-
-    this._assignCardButtons(cardElement);
-
-    return cardElement;
+  _getTemplate() {
+    return document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
   }
 
-  _assignCardButtons(element) {
-    const heartButton = element.querySelector(".card__like-button");
-    heartButton.addEventListener("click", function () {
-      this.classList.toggle("card_liked");
-    });
+  getCardElement() {
+    this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector(".card__image");
+    this._cardText = this._element.querySelector(".card__title");
 
-    const deleteButton = element.querySelector(".card__delete-button");
-    deleteButton.addEventListener("click", function () {
-      this.closest(".card").remove();
-    });
+    this._cardText.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._alt;
 
-    const imageButton = element.querySelector(".card__image");
-    imageButton.addEventListener("click", displayImage);
+    this._heartButton = this._element.querySelector(".card__like-button");
+    this._deleteButton = this._element.querySelector(".card__delete-button");
+    this._imageButton = this._element.querySelector(".card__image");
+
+    this._assignCardButtons();
+
+    return this._element;
   }
 
-  _prependCard() {
-    const newCard = this._getCardElement();
-    cardsDisplayed.prepend(newCard);
+  _assignCardButtons() {
+    this._heartButton.addEventListener("click", () => this._handleLikeButton());
+
+    this._deleteButton.addEventListener("click", () =>
+      this._handleDeleteButton()
+    );
+
+    this._imageButton.addEventListener("click", () => this._displayImage());
   }
 
-  _appendCard() {
-    const newCard = this._getCardElement();
-    cardsDisplayed.append(newCard);
+  _handleLikeButton() {
+    this._heartButton.classList.toggle("card_liked");
+  }
+
+  _handleDeleteButton() {
+    this._deleteButton.closest(".card").remove();
+  }
+
+  _displayImage() {
+    removePreload();
+
+    const modalImageAltText = this._alt;
+    modalImage.src = this._link;
+    modalImage.alt = modalImageAltText;
+    modalImageDescription.textContent = modalImageAltText;
+
+    displayModal(modalDisplayImage);
   }
 }
+
+export default Card;
