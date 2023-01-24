@@ -71,32 +71,22 @@ class FormValidator {
       evt.preventDefault();
     });
 
-    const fieldsetList = [
+    this._fieldsetList = [
       ...this._formElement.querySelectorAll(
         this._settings.formFieldsetSelector
       ),
     ];
 
-    fieldsetList.forEach((fieldsetElement) => {
+    this._fieldsetList.forEach((fieldsetElement) => {
       this._setEventListeners(fieldsetElement);
     });
   }
 
   resetValidation() {
-    const fieldsetList = [
-      ...document.querySelectorAll(this._settings.formFieldsetSelector),
-    ];
-    fieldsetList.forEach((fieldsetElement) => {
-      this._buttonElement = fieldsetElement.querySelector(
-        this._settings.submitButtonSelector
-      );
-      const inputList = [
-        ...fieldsetElement.querySelectorAll(this._settings.inputSelector),
-      ];
-
+    this._fieldsetList.forEach((fieldsetElement) => {
       this._toggleButtonState();
 
-      inputList.forEach((inputElement) => {
+      this._inputList.forEach((inputElement) => {
         this._hideInputError(inputElement, fieldsetElement);
       });
     });

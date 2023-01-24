@@ -2,10 +2,9 @@ import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import {
   removePreload,
-  hideModalOnRemoteClick,
-  hideModalOnEscape,
   displayModal,
   hideModal,
+  setCloseListeners,
 } from "./utils.js";
 
 const configValidate = {
@@ -128,18 +127,6 @@ function loadCards(cards) {
   cards.forEach((card) => {
     const newCard = new Card(card, cardSelector);
     appendCard(newCard.getCardElement());
-  });
-}
-
-function setCloseListeners(config) {
-  const closeButtonList = [
-    ...document.querySelectorAll(config.closeButtonSelector),
-  ];
-
-  closeButtonList.forEach((button) => {
-    button.addEventListener("click", function () {
-      hideModal(button.closest(config.modalOverlaySelector));
-    });
   });
 }
 

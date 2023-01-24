@@ -29,10 +29,23 @@ function hideModal(modal) {
   modal.removeEventListener("mousedown", hideModalOnRemoteClick);
 }
 
+function setCloseListeners(config) {
+  const closeButtonList = [
+    ...document.querySelectorAll(config.closeButtonSelector),
+  ];
+
+  closeButtonList.forEach((button) => {
+    button.addEventListener("click", function () {
+      hideModal(button.closest(config.modalOverlaySelector));
+    });
+  });
+}
+
 export {
   removePreload,
   hideModalOnRemoteClick,
   hideModalOnEscape,
   displayModal,
   hideModal,
+  setCloseListeners,
 };
