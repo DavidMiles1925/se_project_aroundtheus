@@ -26,27 +26,27 @@ const configClose = {
 const initialCards = [
   {
     name: "Boulder, CO",
-    link: "../images/Boulder.jpg",
+    link: "./images/Boulder.jpg",
   },
   {
     name: "Doheny Beach, CA",
-    link: "../images/Doheny.jpg",
+    link: "./images/Doheny.jpg",
   },
   {
     name: "Eureka Springs, AK",
-    link: "../images/Eureka.jpg",
+    link: "./images/Eureka.jpg",
   },
   {
     name: "Fort Lauderdale, FL",
-    link: "../images/Lauderdale.jpg",
+    link: "./images/Lauderdale.jpg",
   },
   {
     name: "Melvern Lake, KS",
-    link: "../images/Melvern.jpg",
+    link: "./images/Melvern.jpg",
   },
   {
     name: "Royal Gorge, CO",
-    link: "../images/Royal.jpg",
+    link: "./images/Royal.jpg",
   },
 ];
 
