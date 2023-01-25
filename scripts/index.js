@@ -1,5 +1,5 @@
 import FormValidator from "./FormValidator.js";
-import Card from "./Carda.js";
+import Card from "./Card.js";
 import {
   removePreload,
   displayModal,
