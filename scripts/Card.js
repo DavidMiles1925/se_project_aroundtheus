@@ -44,15 +44,16 @@ class Card {
     );
   }
 
-  _handleLikeButton() {
+  _handleLikeButton = () => {
     this._heartButton.classList.toggle("card_liked");
-  }
+  };
 
-  _handleDeleteButton() {
-    this._deleteButton.closest(".card").remove();
-  }
+  _handleDeleteButton = () => {
+    this._element.remove();
+    this._element = null;
+  };
 
-  _handleDisplayImage() {
+  _handleDisplayImage = () => {
     removePreload();
 
     this._modalDisplayImage = document.querySelector(".modal_display-image");
@@ -66,7 +67,7 @@ class Card {
     this._modalImageDescription.textContent = this._name;
 
     displayModal(this._modalDisplayImage);
-  }
+  };
 }
 
 export default Card;

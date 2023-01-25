@@ -44,15 +44,15 @@ class FormValidator {
     return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
-  _inputElementListen(inputElement) {
+  _handleInputChange(inputElement) {
     this._checkInputValidity(inputElement);
     this._toggleButtonState();
   }
 
   _setEventListeners() {
-    this._inputList = Array.from(
-      this._fieldsetElement.querySelectorAll(this._settings.inputSelector)
-    );
+    this._inputList = [
+      ...this._fieldsetElement.querySelectorAll(this._settings.inputSelector),
+    ];
     this._buttonElement = this._fieldsetElement.querySelector(
       this._settings.submitButtonSelector
     );
@@ -61,7 +61,7 @@ class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () =>
-        this._inputElementListen(inputElement)
+        this._handleInputChange(inputElement)
       );
     });
   }

@@ -6,49 +6,7 @@ import {
   hideModal,
   setCloseListeners,
 } from "./utils.js";
-
-const configValidate = {
-  formSelector: ".form",
-  formFieldsetSelector: ".form__fieldset",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit-button",
-  inactiveButtonClass: "form__submit-button_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
-};
-
-const configClose = {
-  closeButtonSelector: ".modal__close-button",
-  modalOverlaySelector: ".modal",
-  modalContainerList: ".modal__container",
-};
-
-const initialCards = [
-  {
-    name: "Boulder, CO",
-    link: "./images/Boulder.jpg",
-  },
-  {
-    name: "Doheny Beach, CA",
-    link: "./images/Doheny.jpg",
-  },
-  {
-    name: "Eureka Springs, AK",
-    link: "./images/Eureka.jpg",
-  },
-  {
-    name: "Fort Lauderdale, FL",
-    link: "./images/Lauderdale.jpg",
-  },
-  {
-    name: "Melvern Lake, KS",
-    link: "./images/Melvern.jpg",
-  },
-  {
-    name: "Royal Gorge, CO",
-    link: "./images/Royal.jpg",
-  },
-];
+import { configClose, configValidate, initialCards } from "./constants.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
@@ -110,9 +68,13 @@ function handleAddCardSubmit(evt) {
     name: formTitleText.value,
     link: formLinkText.value,
   };
-  const newCard = new Card(createdCard, cardSelector);
-  prependCard(newCard.getCardElement());
+  prependCard(createCard(createdCard, cardSelector));
   hideModal(modalAddCard);
+}
+
+function createCard(card, cardSelector) {
+  const newCard = new Card(card, cardSelector);
+  return newCard.getCardElement();
 }
 
 function prependCard(card) {
@@ -125,8 +87,7 @@ function appendCard(card) {
 
 function loadCards(cards) {
   cards.forEach((card) => {
-    const newCard = new Card(card, cardSelector);
-    appendCard(newCard.getCardElement());
+    appendCard(createCard(card, cardSelector));
   });
 }
 
