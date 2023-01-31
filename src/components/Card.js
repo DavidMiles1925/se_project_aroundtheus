@@ -1,4 +1,4 @@
-import { removePreload, displayModal } from "./utils.js";
+import { removePreload, displayModal } from "../utils/utils.js";
 
 class Card {
   constructor(data, cardSelector) {

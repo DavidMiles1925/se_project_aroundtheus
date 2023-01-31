@@ -1,12 +1,16 @@
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
+import FormValidator from "./components/FormValidator.js";
+import Card from "./components/Card.js";
 import {
   removePreload,
   displayModal,
   hideModal,
   setCloseListeners,
-} from "./utils.js";
-import { configClose, configValidate, initialCards } from "./constants.js";
+} from "./utils/utils.js";
+import {
+  configClose,
+  configValidate,
+  initialCards,
+} from "./constants/constants.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
