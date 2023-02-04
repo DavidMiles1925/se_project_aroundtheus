@@ -1,7 +1,10 @@
 import Popup from "./Popup";
 
 class PopupWithForm extends Popup {
-  constructor(popupSelctor, handleSubmit) {}
+  constructor(popupSelctor, handleSubmit) {
+    super(popupSelctor);
+    this._handleSubmit = handleSubmit;
+  }
 
   _getInputValues() {}
 

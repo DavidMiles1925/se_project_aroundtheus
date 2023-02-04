@@ -15,8 +15,11 @@ const configClose = {
 };
 
 const configUser = {
-  currentName: ".form__input_type_name",
-  currentAbout: ".form__input_type_about",
+  userModal: ".modal_profile",
+  currentName: ".profile__title",
+  currentAbout: ".profile__description",
+  newName: ".form__input_type_name",
+  newAbout: ".form__input_type_about",
 };
 
 const initialCards = [
@@ -46,4 +49,4 @@ const initialCards = [
   },
 ];
 
-export { configValidate, configClose, initialCards };
+export { configValidate, configClose, configUser, initialCards };

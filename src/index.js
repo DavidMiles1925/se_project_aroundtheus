@@ -9,8 +9,11 @@ import {
 import {
   configClose,
   configValidate,
+  configUser,
   initialCards,
 } from "./constants/constants.js";
+import UserInfo from "./components/UserInfo.js";
+import Popup from "./components/Popup.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
@@ -25,8 +28,6 @@ const addButton = profileElement.querySelector(".profile__add-button");
 
 const formNameText = modalProfile.querySelector(".form__input_type_name");
 const formAboutText = modalProfile.querySelector(".form__input_type_about");
-const currentNameText = profileElement.querySelector(".profile__title");
-const currentAboutText = profileElement.querySelector(".profile__description");
 
 const formTitleText = modalAddCard.querySelector(".form__input_type_place");
 const formLinkText = modalAddCard.querySelector(".form__input_type_link");
@@ -40,9 +41,15 @@ const addFormValidator = new FormValidator(configValidate, formAddCardElement);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
+const userObject = new UserInfo(
+  configUser.currentName,
+  configUser.currentAbout
+);
+
 function fillProfileForm() {
-  formNameText.value = currentNameText.textContent;
-  formAboutText.value = currentAboutText.textContent;
+  const userInfo = userObject.getUserInfo();
+  formNameText.value = userInfo.name;
+  formAboutText.value = userInfo.about;
 }
 
 function displayEdit() {
@@ -61,8 +68,7 @@ function displayAdd() {
 
 function handleProfileSubmit(evt) {
   evt.preventDefault();
-  currentNameText.textContent = formNameText.value;
-  currentAboutText.textContent = formAboutText.value;
+  userObject.setUserInfo(formNameText.value, formAboutText.value);
   hideModal(modalProfile);
 }
 

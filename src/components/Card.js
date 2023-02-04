@@ -1,4 +1,4 @@
-import { removePreload, displayModal } from "../utils/utils.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 class Card {
   constructor(data, cardSelector) {
@@ -54,19 +54,10 @@ class Card {
   };
 
   _handleDisplayImage = () => {
-    removePreload();
+    this._modalDisplayImage = ".modal_display-image";
 
-    this._modalDisplayImage = document.querySelector(".modal_display-image");
-    this._modalImage = this._modalDisplayImage.querySelector(".modal__image");
-    this._modalImageDescription = this._modalDisplayImage.querySelector(
-      ".modal__image-desctription"
-    );
-
-    this._modalImage.src = this._link;
-    this._modalImage.alt = this._alt;
-    this._modalImageDescription.textContent = this._name;
-
-    displayModal(this._modalDisplayImage);
+    const imagePopup = new PopupWithImage(this._modalDisplayImage);
+    imagePopup.open(this._link, this._name);
   };
 }
 
