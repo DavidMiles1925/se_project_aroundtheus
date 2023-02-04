@@ -13,7 +13,7 @@ import {
   initialCards,
 } from "./constants/constants.js";
 import UserInfo from "./components/UserInfo.js";
-import Popup from "./components/Popup.js";
+import PopupWithImage from "./components/PopupWithImage.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
@@ -82,8 +82,15 @@ function handleAddCardSubmit(evt) {
   hideModal(modalAddCard);
 }
 
+function handleDisplayImage(link, name) {
+  const modalDisplayImage = ".modal_display-image";
+
+  const imagePopup = new PopupWithImage(modalDisplayImage);
+  imagePopup.open(link, name);
+}
+
 function createCard(card, cardSelector) {
-  const newCard = new Card(card, cardSelector);
+  const newCard = new Card(card, cardSelector, handleDisplayImage);
   return newCard.getCardElement();
 }
 

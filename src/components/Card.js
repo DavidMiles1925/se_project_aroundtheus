@@ -1,12 +1,12 @@
-import PopupWithImage from "./PopupWithImage.js";
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
 
     this._cardSelector = cardSelector;
+
+    this._imageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -40,7 +40,7 @@ class Card {
       this._handleDeleteButton()
     );
     this._imageButton.addEventListener("click", () =>
-      this._handleDisplayImage()
+      this._imageClick(this._link, this._name)
     );
   }
 
@@ -51,13 +51,6 @@ class Card {
   _handleDeleteButton = () => {
     this._element.remove();
     this._element = null;
-  };
-
-  _handleDisplayImage = () => {
-    this._modalDisplayImage = ".modal_display-image";
-
-    const imagePopup = new PopupWithImage(this._modalDisplayImage);
-    imagePopup.open(this._link, this._name);
   };
 }
 
