@@ -1,11 +1,18 @@
 class Section {
-  constructor({ items, renderer }, classSelector) {}
+  constructor(renderer, classSelector) {
+    this._renderer = renderer;
+    this._cardsDisplayed = classSelector;
+  }
 
-  renderItems() {}
+  renderItems(item) {
+    console.log("rendered");
+    this.addItem(this._renderer(item));
+  }
 
-  _renderer() {}
-
-  addItem()
+  addItem(item) {
+    console.log("adding item");
+    this._cardsDisplayed.prepend(item);
+  }
 }
 
 export default Section;

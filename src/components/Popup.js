@@ -2,9 +2,11 @@ import { removePreload } from "../utils/utils.js";
 
 class Popup {
   constructor(popupSelector) {
-    this._popupElement = document.querySelector(`${popupSelector}`);
+    this._popupElement = popupSelector;
 
-    this._button = this._popupElement.querySelector(".modal__close-button");
+    this._closeButton = this._popupElement.querySelector(
+      ".modal__close-button"
+    );
   }
 
   open() {
@@ -36,7 +38,7 @@ class Popup {
       "mousedown",
       this._handleRemoteClickClose.bind(this)
     );
-    this._button.addEventListener("click", this.close.bind(this));
+    this._closeButton.addEventListener("click", this.close.bind(this));
   }
 
   _removeEventListeners() {
