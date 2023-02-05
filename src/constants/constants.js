@@ -1,3 +1,14 @@
+const davidImage = new URL("../images/david.jpg", import.meta.url);
+
+const boulderImage = new URL("../images/Boulder.jpg", import.meta.url);
+const dohenyImage = new URL("../images/Doheny.jpg", import.meta.url);
+const eurekaImage = new URL("../images/Eureka.jpg", import.meta.url);
+const lauderdaleImage = new URL("../images/Lauderdale.jpg", import.meta.url);
+const melvernImage = new URL("../images/Melvern.jpg", import.meta.url);
+const royalImage = new URL("../images/Royal.jpg", import.meta.url);
+
+const cardsDisplayed = ".cards";
+
 const configValidate = {
   formSelector: ".form",
   formFieldsetSelector: ".form__fieldset",
@@ -25,28 +36,34 @@ const configUser = {
 const initialCards = [
   {
     name: "Boulder, CO",
-    link: "./images/Boulder.jpg",
+    link: boulderImage,
   },
   {
     name: "Doheny Beach, CA",
-    link: "./images/Doheny.jpg",
+    link: dohenyImage,
   },
   {
     name: "Eureka Springs, AK",
-    link: "./images/Eureka.jpg",
+    link: eurekaImage,
   },
   {
     name: "Fort Lauderdale, FL",
-    link: "./images/Lauderdale.jpg",
+    link: lauderdaleImage,
   },
   {
     name: "Melvern Lake, KS",
-    link: "./images/Melvern.jpg",
+    link: melvernImage,
   },
   {
     name: "Royal Gorge, CO",
-    link: "./images/Royal.jpg",
+    link: royalImage,
   },
 ];
 
-export { configValidate, configClose, configUser, initialCards };
+export {
+  cardsDisplayed,
+  configValidate,
+  configClose,
+  configUser,
+  initialCards,
+};

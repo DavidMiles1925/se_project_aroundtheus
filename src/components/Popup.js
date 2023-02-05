@@ -7,6 +7,10 @@ class Popup {
     this._closeButton = this._popupElement.querySelector(
       ".modal__close-button"
     );
+
+    this._handleEscCloseBound = this._handleEscClose.bind(this);
+    this._handleRemoteClickCloseBound = this._handleRemoteClickClose.bind(this);
+    this._CloseBound = this.close.bind(this);
   }
 
   open() {
@@ -33,19 +37,19 @@ class Popup {
   }
 
   _setEventListeners() {
-    document.addEventListener("keydown", this._handleEscClose.bind(this));
+    document.addEventListener("keydown", this._handleEscCloseBound);
     this._popupElement.addEventListener(
       "mousedown",
-      this._handleRemoteClickClose.bind(this)
+      this._handleRemoteClickCloseBound
     );
-    this._closeButton.addEventListener("click", this.close.bind(this));
+    this._closeButton.addEventListener("click", this._CloseBound);
   }
 
   _removeEventListeners() {
-    document.removeEventListener("keydown", this._handleEscClose);
+    document.removeEventListener("keydown", this._handleEscCloseBound);
     this._popupElement.removeEventListener(
       "mousedown",
-      this._handleRemoteClickClose.bind(this)
+      this._handleRemoteClickCloseBound
     );
   }
 }

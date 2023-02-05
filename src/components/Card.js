@@ -6,7 +6,7 @@ class Card {
 
     this._cardSelector = cardSelector;
 
-    this._imageClick = handleImageClick;
+    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -40,7 +40,7 @@ class Card {
       this._handleDeleteButton()
     );
     this._imageButton.addEventListener("click", () =>
-      this._imageClick(this._link, this._name)
+      this._handleImageClick(this._link, this._name)
     );
   }
 

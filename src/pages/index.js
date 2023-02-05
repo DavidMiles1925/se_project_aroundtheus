@@ -1,14 +1,16 @@
-import FormValidator from "./components/FormValidator.js";
-import Card from "./components/Card.js";
+import "./index.css";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
 import {
+  cardsDisplayed,
   configValidate,
   configUser,
   initialCards,
-} from "./constants/constants.js";
-import UserInfo from "./components/UserInfo.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import Section from "./components/Section.js";
+} from "../constants/constants.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
@@ -25,11 +27,7 @@ const addButton = profileElement.querySelector(".profile__add-button");
 const formNameText = modalProfile.querySelector(".form__input_type_name");
 const formAboutText = modalProfile.querySelector(".form__input_type_about");
 
-const formTitleText = modalAddCard.querySelector(".form__input_type_place");
-const formLinkText = modalAddCard.querySelector(".form__input_type_link");
-
 const cardSelector = "#card";
-const cardsDisplayed = document.querySelector(".cards");
 
 const cardSection = new Section(createCard, cardsDisplayed);
 
@@ -69,20 +67,15 @@ function displayAdd() {
 function handleProfileSubmit(evt) {
   evt.preventDefault();
   const inputData = editForm.getInputValues();
-  userObject.setUserInfo(inputData[0], inputData[1]);
+  userObject.setUserInfo(inputData.name, inputData.link);
   editForm.close();
 }
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const inputData = addForm.getInputValues();
-  const createdCard = {
-    name: inputData[0],
-    link: inputData[1],
-  };
-  cardSection.renderItems(createdCard);
+  const createdCard = addForm.getInputValues();
+  cardSection.addItem(createdCard);
   addForm.close();
-  console.log("handled");
 }
 
 function handleDisplayImage(link, name) {
@@ -104,6 +97,5 @@ function setPageListeners() {
   editButton.addEventListener("click", displayEdit);
   addButton.addEventListener("click", displayAdd);
 }
-
-loadCards(initialCards);
+cardSection.renderItems(initialCards);
 setPageListeners();

@@ -11,8 +11,9 @@ class PopupWithForm extends Popup {
     const formFieldInputs = [
       ...this._formSelector.querySelectorAll(".form__input"),
     ];
-    const inputValues = [];
-    formFieldInputs.forEach((input) => inputValues.push(input.value));
+    const inputValues = {};
+    inputValues.name = formFieldInputs[0].value;
+    inputValues.link = formFieldInputs[1].value;
 
     return inputValues;
   }
@@ -25,11 +26,6 @@ class PopupWithForm extends Popup {
   _removeEventListeners() {
     super._removeEventListeners();
     this._formSelector.removeEventListener("submit", this._handleSubmit);
-    console.log("removed");
-  }
-
-  open() {
-    super.open();
   }
 
   close() {
