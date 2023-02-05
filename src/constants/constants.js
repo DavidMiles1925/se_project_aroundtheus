@@ -35,27 +35,27 @@ const configUser = {
 
 const initialCards = [
   {
-    name: "Boulder, CO",
+    place: "Boulder, CO",
     link: boulderImage,
   },
   {
-    name: "Doheny Beach, CA",
+    place: "Doheny Beach, CA",
     link: dohenyImage,
   },
   {
-    name: "Eureka Springs, AK",
+    place: "Eureka Springs, AK",
     link: eurekaImage,
   },
   {
-    name: "Fort Lauderdale, FL",
+    place: "Fort Lauderdale, FL",
     link: lauderdaleImage,
   },
   {
-    name: "Melvern Lake, KS",
+    place: "Melvern Lake, KS",
     link: melvernImage,
   },
   {
-    name: "Royal Gorge, CO",
+    place: "Royal Gorge, CO",
     link: royalImage,
   },
 ];

@@ -64,22 +64,18 @@ function displayAdd() {
   addFormValidator.resetValidation();
 }
 
-function handleProfileSubmit(evt) {
-  evt.preventDefault();
-  const inputData = editForm.getInputValues();
-  userObject.setUserInfo(inputData.name, inputData.link);
+function handleProfileSubmit(data) {
+  userObject.setUserInfo(data.name, data.about);
   editForm.close();
 }
 
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const createdCard = addForm.getInputValues();
-  cardSection.addItem(createdCard);
+function handleAddCardSubmit(data) {
+  cardSection.addItem(data);
   addForm.close();
 }
 
-function handleDisplayImage(link, name) {
-  imagePopup.open(link, name);
+function handleDisplayImage(name, link) {
+  imagePopup.open(name, link);
 }
 
 function createCard(card) {

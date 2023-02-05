@@ -1,8 +1,8 @@
 class Card {
   constructor(data, cardSelector, handleImageClick) {
-    this._name = data.name;
+    this._name = data.place;
     this._link = data.link;
-    this._alt = data.name;
+    this._alt = data.place;
 
     this._cardSelector = cardSelector;
 
@@ -40,7 +40,7 @@ class Card {
       this._handleDeleteButton()
     );
     this._imageButton.addEventListener("click", () =>
-      this._handleImageClick(this._link, this._name)
+      this._handleImageClick(this._name, this._link)
     );
   }
 

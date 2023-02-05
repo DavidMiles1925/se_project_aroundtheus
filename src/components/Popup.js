@@ -10,7 +10,7 @@ class Popup {
 
     this._handleEscCloseBound = this._handleEscClose.bind(this);
     this._handleRemoteClickCloseBound = this._handleRemoteClickClose.bind(this);
-    this._CloseBound = this.close.bind(this);
+    this._closePopupBound = this.close.bind(this);
   }
 
   open() {
@@ -42,7 +42,7 @@ class Popup {
       "mousedown",
       this._handleRemoteClickCloseBound
     );
-    this._closeButton.addEventListener("click", this._CloseBound);
+    this._closeButton.addEventListener("click", this._closePopupBound);
   }
 
   _removeEventListeners() {
@@ -51,6 +51,7 @@ class Popup {
       "mousedown",
       this._handleRemoteClickCloseBound
     );
+    this._closeButton.removeEventListener("click", this._closePopupBound);
   }
 }
 
