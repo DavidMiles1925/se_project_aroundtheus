@@ -27,5 +27,6 @@
   },
   "dependencies": {
     "core-js": "3.23.5"
-  }
+  },
+  "homepage:": "https://github.com/DavidMiles1925/se_project_aroundtheus/src/index.html"
 }
