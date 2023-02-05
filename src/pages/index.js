@@ -87,12 +87,6 @@ function createCard(card) {
   return newCard.getCardElement();
 }
 
-function loadCards(cards) {
-  cards.forEach((card) => {
-    cardSection.renderItems(card);
-  });
-}
-
 function setPageListeners() {
   editButton.addEventListener("click", displayEdit);
   addButton.addEventListener("click", displayAdd);
