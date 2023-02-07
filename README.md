@@ -6,7 +6,7 @@
 
 **Modules**
 
-Seperate files were encapsulated and implemented using "import" and "export" functionality.
+Seperate files were encapsulated and implemented using "import" and "export" functionality. Each object is designed to have its own functionality, and to be reusable in other projects if at all possible.
 
 **Classes**
 
