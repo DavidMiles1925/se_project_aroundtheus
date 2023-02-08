@@ -10,7 +10,7 @@ Seperate files were encapsulated and implemented using "import" and "export" fun
 
 **Classes**
 
-"FormValidator" and "Card" classes were implemented for site functionality.
+Objects such as "FormValidator" and "Card" classes were implemented for site functionality.
 
 ![Classes](./src/images/readme_classes.png)
 
