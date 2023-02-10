@@ -3,13 +3,6 @@ const baseURL = "https://around.nomoreparties.co/v1/group-12";
 
 const davidImage = new URL("../images/david.jpg", import.meta.url);
 
-const boulderImage = new URL("../images/Boulder.jpg", import.meta.url);
-const dohenyImage = new URL("../images/Doheny.jpg", import.meta.url);
-const eurekaImage = new URL("../images/Eureka.jpg", import.meta.url);
-const lauderdaleImage = new URL("../images/Lauderdale.jpg", import.meta.url);
-const melvernImage = new URL("../images/Melvern.jpg", import.meta.url);
-const royalImage = new URL("../images/Royal.jpg", import.meta.url);
-
 const cardsDisplayed = ".cards";
 
 const configValidate = {
@@ -36,7 +29,7 @@ const configUser = {
   newAbout: ".form__input_type_about",
 };
 
-const initialCards = [
+/*const initialCards = [
   {
     name: "Boulder, CO",
     link: boulderImage,
@@ -67,14 +60,13 @@ const initialCards = [
     link: royalImage,
     likes: [],
   },
-];
+];*/
 
 export {
   cardsDisplayed,
   configValidate,
   configClose,
   configUser,
-  initialCards,
   authToken,
   baseURL,
 };

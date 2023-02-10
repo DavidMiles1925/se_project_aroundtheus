@@ -46,6 +46,16 @@ class Api {
     });
   }
 
+  setAvatar(data) {
+    fetch(`${this._baseURL}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    });
+  }
+
   addCard(data) {
     return fetch(`${this._baseURL}/cards`, {
       method: "POST",
@@ -65,16 +75,16 @@ class Api {
     }).then(this._processServerResponse);
   }
 
-  addLike() {
+  addLike(data) {
     return fetch(`${this._baseURL}/cards/likes/${data}`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._processServerResponse);
   }
 
-  removeLike() {
+  removeLike(data) {
     return fetch(`${this._baseURL}/cards/likes/${data}`, {
-      method: "PUT",
+      method: "DELETE",
       headers: this._headers,
     }).then(this._processServerResponse);
   }

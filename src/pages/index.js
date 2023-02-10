@@ -5,7 +5,6 @@ import {
   cardsDisplayed,
   configValidate,
   configUser,
-  initialCards,
   authToken,
   baseURL,
 } from "../constants/constants.js";
@@ -18,16 +17,20 @@ import Api from "../utils/API.js";
 
 const modalProfile = document.querySelector(".modal_profile");
 const modalAddCard = document.querySelector(".modal_add-card");
+const modalPicture = document.querySelector(".modal_profile-picture");
 const modalImage = document.querySelector(".modal_display-image");
 const modalConfirm = document.querySelector(".modal_confirm");
 
 const formProfileElement = modalProfile.querySelector(".form");
 const formAddCardElement = modalAddCard.querySelector(".form");
+const formPictureElement = modalPicture.querySelector(".form");
 
 const profileElement = document.querySelector(".profile");
 
 const editButton = profileElement.querySelector(".profile__edit-button");
 const addButton = profileElement.querySelector(".profile__add-button");
+const pictureButton = profileElement.querySelector(".profile__image-button");
+const profilePicture = profileElement.querySelector(".profile__image");
 
 const formNameText = modalProfile.querySelector(".form__input_type_name");
 const formAboutText = modalProfile.querySelector(".form__input_type_about");
@@ -36,6 +39,8 @@ const cardSelector = "#card";
 
 let userId;
 
+const api = new Api(baseURL, authToken);
+
 const cardSection = new Section(createCard, cardsDisplayed);
 
 const userObject = new UserInfo(
@@ -43,20 +48,24 @@ const userObject = new UserInfo(
   configUser.currentAbout
 );
 
-const imagePopup = new PopupWithImage(modalImage);
+const imagePopup = new PopupWithImage(modalImage, handlePictureSubmit);
 
 const editForm = new PopupWithForm(modalProfile, handleProfileSubmit);
 const addForm = new PopupWithForm(modalAddCard, handleAddCardSubmit);
+const pictureForm = new PopupWithForm(modalPicture, handlePictureSubmit);
 
 const confirmForm = new PopupWithConfirm(modalConfirm);
 
 const editFormValidator = new FormValidator(configValidate, formProfileElement);
 const addFormValidator = new FormValidator(configValidate, formAddCardElement);
-
-const api = new Api(baseURL, authToken);
+const pictureFormValidator = new FormValidator(
+  configValidate,
+  formPictureElement
+);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+pictureFormValidator.enableValidation();
 
 function fillProfileForm() {
   const userInfo = userObject.getUserInfo();
@@ -73,6 +82,10 @@ function displayEdit() {
 function displayAdd() {
   addForm.open();
   addFormValidator.resetValidation();
+}
+
+function displayChangeAvatar() {
+  pictureForm.open();
 }
 
 function handleProfileSubmit(data) {
@@ -97,6 +110,11 @@ function handleAddCardSubmit(data) {
     });
 }
 
+function handlePictureSubmit(data) {
+  pictureForm.close();
+  api.setAvatar(data.avatar);
+}
+
 function handleDisplayImage(name, link) {
   imagePopup.open(name, link);
 }
@@ -119,15 +137,16 @@ function handleDeleteCard(card) {
 }
 
 function handleCardLike(card) {
-  if (card.isLiked) {
-    Promise.resolve(api.removeLike(card._id))
-      .then(card.handleLikeButton())
+  if (card.isLiked()) {
+    api
+      .removeLike(card._id)
+      .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
         return Promise.reject(`Error: ${err.status}`);
       });
   } else {
     Promise.resolve(api.addLike(card._id))
-      .then(card.handleLikeButton())
+      .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
         return Promise.reject(`Error: ${err.status}`);
       });
@@ -135,10 +154,10 @@ function handleCardLike(card) {
 }
 
 function createCard(card) {
-  console.log("card from createCard: ", card);
   const newCard = new Card(
     card,
     cardSelector,
+    handleCardLike,
     handleDisplayImage,
     handleDeleteCard,
     userId
@@ -149,12 +168,13 @@ function createCard(card) {
 function setPageListeners() {
   editButton.addEventListener("click", displayEdit);
   addButton.addEventListener("click", displayAdd);
+  pictureButton.addEventListener("click", displayChangeAvatar);
 }
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, initialData]) => {
     userId = userData._id;
-    console.log("userDataID:  ", userData._id);
+    profilePicture.src = userData.avatar;
     userObject.setUserInfo(userData.name, userData.about);
     cardSection.renderItems(initialData);
   })
