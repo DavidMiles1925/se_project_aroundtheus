@@ -1,3 +1,6 @@
+const authToken = "cd0a9a45-f29d-487c-ac51-4b9d290460ac";
+const baseURL = "https://around.nomoreparties.co/v1/group-12";
+
 const davidImage = new URL("../images/david.jpg", import.meta.url);
 
 const boulderImage = new URL("../images/Boulder.jpg", import.meta.url);
@@ -35,28 +38,34 @@ const configUser = {
 
 const initialCards = [
   {
-    place: "Boulder, CO",
+    name: "Boulder, CO",
     link: boulderImage,
+    likes: [],
   },
   {
-    place: "Doheny Beach, CA",
+    name: "Doheny Beach, CA",
     link: dohenyImage,
+    likes: [],
   },
   {
-    place: "Eureka Springs, AK",
+    name: "Eureka Springs, AK",
     link: eurekaImage,
+    likes: [],
   },
   {
-    place: "Fort Lauderdale, FL",
+    name: "Fort Lauderdale, FL",
     link: lauderdaleImage,
+    likes: [],
   },
   {
-    place: "Melvern Lake, KS",
+    name: "Melvern Lake, KS",
     link: melvernImage,
+    likes: [],
   },
   {
-    place: "Royal Gorge, CO",
+    name: "Royal Gorge, CO",
     link: royalImage,
+    likes: [],
   },
 ];
 
@@ -66,4 +75,6 @@ export {
   configClose,
   configUser,
   initialCards,
+  authToken,
+  baseURL,
 };
