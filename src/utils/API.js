@@ -36,18 +36,18 @@ class Api {
   }
 
   setUserInfo(data) {
-    fetch(`${this._baseURL}/users/me`, {
+    return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
       }),
-    });
+    }).then(this._processServerResponse);
   }
 
   setAvatar(data) {
-    fetch(`${this._baseURL}/users/me/avatar`, {
+    return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({

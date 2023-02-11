@@ -4,7 +4,7 @@ class Card {
     cardSelector,
     handleLike,
     handleImageClick,
-    deleteServerCard,
+    deleteCard,
     userId
   ) {
     this._name = data.name;
@@ -19,7 +19,7 @@ class Card {
 
     this._handleLike = handleLike;
     this._handleImageClick = handleImageClick;
-    this._deleteServerCard = deleteServerCard;
+    this._deleteCard = deleteCard;
   }
 
   _getTemplate() {
@@ -57,9 +57,7 @@ class Card {
 
   _assignCardButtons() {
     this._heartButton.addEventListener("click", () => this._handleLike(this));
-    this._deleteButton.addEventListener("click", () =>
-      this._deleteServerCard(this)
-    );
+    this._deleteButton.addEventListener("click", () => this._deleteCard(this));
     this._imageButton.addEventListener("click", () =>
       this._handleImageClick(this._name, this._link)
     );

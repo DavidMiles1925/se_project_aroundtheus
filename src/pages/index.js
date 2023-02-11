@@ -27,10 +27,11 @@ const formPictureElement = modalPicture.querySelector(".form");
 
 const profileElement = document.querySelector(".profile");
 
-const editButton = profileElement.querySelector(".profile__edit-button");
-const addButton = profileElement.querySelector(".profile__add-button");
-const pictureButton = profileElement.querySelector(".profile__image-button");
-const profilePicture = profileElement.querySelector(".profile__image");
+const editProfileButton = profileElement.querySelector(".profile__edit-button");
+const addCardButton = profileElement.querySelector(".profile__add-button");
+const changeAvatarButton = profileElement.querySelector(
+  ".profile__image-button"
+);
 
 const formNameText = modalProfile.querySelector(".form__input_type_name");
 const formAboutText = modalProfile.querySelector(".form__input_type_about");
@@ -51,23 +52,29 @@ const userObject = new UserInfo(
 
 const imagePopup = new PopupWithImage(modalImage, handlePictureSubmit);
 
-const editForm = new PopupWithForm(modalProfile, handleProfileSubmit);
-const addForm = new PopupWithForm(modalAddCard, handleAddCardSubmit);
-const pictureForm = new PopupWithForm(modalPicture, handlePictureSubmit);
+const editProfileForm = new PopupWithForm(modalProfile, handleProfileSubmit);
+const addProfileForm = new PopupWithForm(modalAddCard, handleAddCardSubmit);
+const changeAvatarForm = new PopupWithForm(modalPicture, handlePictureSubmit);
 
 const confirmForm = new PopupWithConfirm(modalConfirm);
 confirmForm.setEventListeners();
 
-const editFormValidator = new FormValidator(configValidate, formProfileElement);
-const addFormValidator = new FormValidator(configValidate, formAddCardElement);
-const pictureFormValidator = new FormValidator(
+const editProfileFormValidator = new FormValidator(
+  configValidate,
+  formProfileElement
+);
+const addProfileFormValidator = new FormValidator(
+  configValidate,
+  formAddCardElement
+);
+const changeAvatarFormValidator = new FormValidator(
   configValidate,
   formPictureElement
 );
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-pictureFormValidator.enableValidation();
+editProfileFormValidator.enableValidation();
+addProfileFormValidator.enableValidation();
+changeAvatarFormValidator.enableValidation();
 
 function fillProfileForm() {
   const userInfo = userObject.getUserInfo();
@@ -77,63 +84,57 @@ function fillProfileForm() {
 
 function displayEdit() {
   fillProfileForm();
-  editForm.open();
-  editFormValidator.resetValidation();
+  editProfileForm.open();
+  editProfileFormValidator.resetValidation();
 }
 
 function displayAdd() {
-  addForm.open();
-  addFormValidator.resetValidation();
+  addProfileForm.open();
+  addProfileFormValidator.resetValidation();
 }
 
 function displayChangeAvatar() {
-  pictureForm.open();
+  changeAvatarForm.open();
 }
 
 function handleProfileSubmit(data) {
-  editForm.toggleIsSaving(true);
-  Promise.resolve(api.setUserInfo(data))
+  editProfileForm.toggleIsSaving(true);
+  api
+    .setUserInfo(data)
     .then(() => {
       userObject.setUserInfo(data.name, data.about);
+      editProfileForm.close();
     })
     .catch((err) => {
-      return Promise.reject(`Error: ${err.status}`);
+      console.log(`Error: ${err.status}`);
     })
     .finally(() => {
-      editForm.toggleIsSaving(false);
-      editForm.close();
+      editProfileForm.toggleIsSaving(false);
     });
 }
 
 function handleAddCardSubmit(data) {
-  addForm.toggleIsSaving(true);
+  addProfileForm.toggleIsSaving(true);
   api
     .addCard(data)
     .then((cardData) => {
       cardSection.addItem(cardData);
     })
     .catch((err) => {
-      return Promise.reject(`Error: ${err.status}`);
+      console.log(`Error: ${err.status}`);
     })
     .finally(() => {
-      addForm.toggleIsSaving(false);
-      addForm.close();
+      addProfileForm.toggleIsSaving(false);
+      addProfileForm.close();
     });
 }
 
 function handlePictureSubmit(data) {
-  pictureForm.toggleIsSaving(true);
-  Promise.resolve(api.setAvatar(data.avatar))
-    .then(() => {
-      userObject.setProfilePicture(data.avatar);
-    })
-    .catch((rerr) => {
-      return Promise.reject(`Error: ${err.status}`);
-    })
-    .finally(() => {
-      pictureForm.toggleIsSaving(false);
-      pictureForm.close();
-    });
+  changeAvatarForm.toggleIsSaving(true);
+  api.setAvatar(data.avatar);
+  userObject.setProfilePicture(data.avatar);
+  changeAvatarForm.close();
+  changeAvatarForm.toggleIsSaving(false);
 }
 
 function handleDisplayImage(name, link) {
@@ -143,15 +144,17 @@ function handleDisplayImage(name, link) {
 function handleDeleteCard(card) {
   confirmForm.open();
   confirmForm.setSubmit(() => {
+    confirmForm.toggleIsSaving(true);
     Promise.resolve(api.deleteCard(card._id))
       .then(() => {
         card.handleDeleteLocalCard();
-      })
-      .then(() => {
         confirmForm.close();
       })
       .catch((err) => {
-        return Promise.reject(`Error: ${err.status}`);
+        console.log(`Error: ${err.status}`);
+      })
+      .finally(() => {
+        confirmForm.toggleIsSaving(true);
       });
   });
 }
@@ -161,13 +164,13 @@ function handleCardLike(card) {
     Promise.resolve(api.removeLike(card._id))
       .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
-        return Promise.reject(`Error: ${err.status}`);
+        console.log(`Error: ${err.status}`);
       });
   } else {
     Promise.resolve(api.addLike(card._id))
       .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
-        return Promise.reject(`Error: ${err.status}`);
+        console.log(`Error: ${err.status}`);
       });
   }
 }
@@ -185,9 +188,9 @@ function createCard(card) {
 }
 
 function setPageListeners() {
-  editButton.addEventListener("click", displayEdit);
-  addButton.addEventListener("click", displayAdd);
-  pictureButton.addEventListener("click", displayChangeAvatar);
+  editProfileButton.addEventListener("click", displayEdit);
+  addCardButton.addEventListener("click", displayAdd);
+  changeAvatarButton.addEventListener("click", displayChangeAvatar);
 }
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
