@@ -45,7 +45,8 @@ const cardSection = new Section(createCard, cardsDisplayed);
 
 const userObject = new UserInfo(
   configUser.currentName,
-  configUser.currentAbout
+  configUser.currentAbout,
+  configUser.profilePicture
 );
 
 const imagePopup = new PopupWithImage(modalImage, handlePictureSubmit);
@@ -55,6 +56,7 @@ const addForm = new PopupWithForm(modalAddCard, handleAddCardSubmit);
 const pictureForm = new PopupWithForm(modalPicture, handlePictureSubmit);
 
 const confirmForm = new PopupWithConfirm(modalConfirm);
+confirmForm.setEventListeners();
 
 const editFormValidator = new FormValidator(configValidate, formProfileElement);
 const addFormValidator = new FormValidator(configValidate, formAddCardElement);
@@ -89,30 +91,49 @@ function displayChangeAvatar() {
 }
 
 function handleProfileSubmit(data) {
+  editForm.toggleIsSaving(true);
   Promise.resolve(api.setUserInfo(data))
     .then(() => {
       userObject.setUserInfo(data.name, data.about);
-      editForm.close();
     })
     .catch((err) => {
       return Promise.reject(`Error: ${err.status}`);
+    })
+    .finally(() => {
+      editForm.toggleIsSaving(false);
+      editForm.close();
     });
 }
 
 function handleAddCardSubmit(data) {
-  addForm.close();
-  Promise.resolve(api.addCard(data))
+  addForm.toggleIsSaving(true);
+  api
+    .addCard(data)
     .then((cardData) => {
       cardSection.addItem(cardData);
     })
     .catch((err) => {
       return Promise.reject(`Error: ${err.status}`);
+    })
+    .finally(() => {
+      addForm.toggleIsSaving(false);
+      addForm.close();
     });
 }
 
 function handlePictureSubmit(data) {
-  pictureForm.close();
-  api.setAvatar(data.avatar);
+  pictureForm.toggleIsSaving(true);
+  Promise.resolve(api.setAvatar(data.avatar))
+    .then(() => {
+      userObject.setProfilePicture(data.avatar);
+    })
+    .catch((rerr) => {
+      return Promise.reject(`Error: ${err.status}`);
+    })
+    .finally(() => {
+      pictureForm.toggleIsSaving(false);
+      pictureForm.close();
+    });
 }
 
 function handleDisplayImage(name, link) {
@@ -120,7 +141,6 @@ function handleDisplayImage(name, link) {
 }
 
 function handleDeleteCard(card) {
-  console.log("card._id: ", card._id);
   confirmForm.open();
   confirmForm.setSubmit(() => {
     Promise.resolve(api.deleteCard(card._id))
@@ -138,8 +158,7 @@ function handleDeleteCard(card) {
 
 function handleCardLike(card) {
   if (card.isLiked()) {
-    api
-      .removeLike(card._id)
+    Promise.resolve(api.removeLike(card._id))
       .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
         return Promise.reject(`Error: ${err.status}`);
@@ -174,7 +193,7 @@ function setPageListeners() {
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, initialData]) => {
     userId = userData._id;
-    profilePicture.src = userData.avatar;
+    userObject.setProfilePicture(userData.avatar);
     userObject.setUserInfo(userData.name, userData.about);
     cardSection.renderItems(initialData);
   })

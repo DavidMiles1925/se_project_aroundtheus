@@ -6,27 +6,13 @@ class PopupWithConfirm extends Popup {
     this._formSelector = this._popupElement.querySelector(".form");
   }
 
-  _myListener(evt) {
-    evt.preventDefault();
-    this._handleSubmit;
-    console.log("hello");
-    this._removeEventListeners;
-  }
-
-  _setEventListeners() {
+  setEventListeners() {
     super._setEventListeners();
     this._formSelector.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleSubmit();
     });
   }
-
-  /* _removeEventListeners() {
-    this._formSelector.removeEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._handleSubmit();
-    });
-  }*/
 
   setSubmit(input) {
     this._handleSubmit = input;

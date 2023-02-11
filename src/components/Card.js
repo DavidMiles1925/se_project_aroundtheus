@@ -85,7 +85,6 @@ class Card {
   }
 
   handleDeleteLocalCard() {
-    console.log(this._element);
     this._element.remove();
     this._element = null;
   }

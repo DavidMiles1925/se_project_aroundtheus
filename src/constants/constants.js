@@ -27,6 +27,7 @@ const configUser = {
   currentAbout: ".profile__description",
   newName: ".form__input_type_name",
   newAbout: ".form__input_type_about",
+  profilePicture: ".profile__image",
 };
 
 /*const initialCards = [
