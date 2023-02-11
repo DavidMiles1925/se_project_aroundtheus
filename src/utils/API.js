@@ -32,7 +32,9 @@ class Api {
   }
 
   getApiInfo() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]).then(
+      this._processServerResponse
+    );
   }
 
   setUserInfo(data) {
@@ -53,7 +55,7 @@ class Api {
       body: JSON.stringify({
         avatar: data,
       }),
-    });
+    }).then(this._processServerResponse);
   }
 
   addCard(data) {

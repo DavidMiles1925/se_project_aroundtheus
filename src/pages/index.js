@@ -131,10 +131,16 @@ function handleAddCardSubmit(data) {
 
 function handlePictureSubmit(data) {
   changeAvatarForm.toggleIsSaving(true);
-  api.setAvatar(data.avatar);
-  userObject.setProfilePicture(data.avatar);
-  changeAvatarForm.close();
-  changeAvatarForm.toggleIsSaving(false);
+  api
+    .setAvatar(data.avatar)
+    .then(() => userObject.setProfilePicture(data.avatar))
+    .catch((err) => {
+      console.log(`Error: ${err.status}`);
+    })
+    .finally(() => {
+      changeAvatarForm.close();
+      changeAvatarForm.toggleIsSaving(false);
+    });
 }
 
 function handleDisplayImage(name, link) {
@@ -145,7 +151,8 @@ function handleDeleteCard(card) {
   confirmForm.open();
   confirmForm.setSubmit(() => {
     confirmForm.toggleIsSaving(true);
-    Promise.resolve(api.deleteCard(card._id))
+    api
+      .deleteCard(card._id)
       .then(() => {
         card.handleDeleteLocalCard();
         confirmForm.close();
@@ -161,13 +168,15 @@ function handleDeleteCard(card) {
 
 function handleCardLike(card) {
   if (card.isLiked()) {
-    Promise.resolve(api.removeLike(card._id))
+    api
+      .removeLike(card._id)
       .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
         console.log(`Error: ${err.status}`);
       });
   } else {
-    Promise.resolve(api.addLike(card._id))
+    api
+      .addLike(card._id)
       .then((res) => card.updateLikes(res.likes))
       .catch((err) => {
         console.log(`Error: ${err.status}`);
