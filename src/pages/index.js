@@ -93,6 +93,10 @@ function displayAdd() {
   addProfileFormValidator.resetValidation();
 }
 
+function handleDisplayImage(name, link) {
+  imagePopup.open(name, link);
+}
+
 function displayChangeAvatar() {
   changeAvatarForm.open();
 }
@@ -119,13 +123,13 @@ function handleAddCardSubmit(data) {
     .addCard(data)
     .then((cardData) => {
       cardSection.addItem(cardData);
+      addProfileForm.close();
     })
     .catch((err) => {
       console.log(`Error: ${err.status}`);
     })
     .finally(() => {
       addProfileForm.toggleIsSaving(false);
-      addProfileForm.close();
     });
 }
 
@@ -133,18 +137,16 @@ function handlePictureSubmit(data) {
   changeAvatarForm.toggleIsSaving(true);
   api
     .setAvatar(data.avatar)
-    .then(() => userObject.setProfilePicture(data.avatar))
+    .then(() => {
+      userObject.setProfilePicture(data.avatar);
+      changeAvatarForm.close();
+    })
     .catch((err) => {
       console.log(`Error: ${err.status}`);
     })
     .finally(() => {
-      changeAvatarForm.close();
       changeAvatarForm.toggleIsSaving(false);
     });
-}
-
-function handleDisplayImage(name, link) {
-  imagePopup.open(name, link);
 }
 
 function handleDeleteCard(card) {
