@@ -8,7 +8,7 @@
 
 The project was published on GitHub pages using Webpack and Node.js so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
 
-![Webpack](./src/images/readme_webpack.png) ![Node](./src/images/readme_nodejs.jpg)
+![Webpack](./src/images/readme_webpk.png) ![Node](./src/images/readme_node.jpg)
 
 ### Implementation of Data via API
 
