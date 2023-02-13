@@ -8,21 +8,21 @@
 
 The project was published on GitHub pages using Webpack and Node.js so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
 
-![Webpack](.src/images/readme_webpack.svg)![Node](.src/images/readme_node.svg)
+![Webpack](/.src/images/readme_webpack.svg)![Node](/.src/images/readme_node.svg)
 
 ### Implementation of Data via API
 
-**Anychronous Code**
+**Asynchronous Code**
 
 Methods fetch\(\), then\(\), and finally\(\) were used when interfacing with the API to avoid code being run out of sequence.
 
-![Asych](.src/images/readme_async.png)
+![Asych](/.src/images/readme_async.png)
 
 **Seemless UX**
 
 Special attention was given to order of operations to ensure users have a good experience on the page. A "Saving..." feature was added to forms so users know that data is being communicated to/from the server and not experince a "freeze".
 
-![Saving](.src/images/readme_saving.png)
+![Saving](/.src/images/readme_saving.png)
 
 ### Object Oriented Programming
 
