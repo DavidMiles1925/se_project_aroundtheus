@@ -8,7 +8,7 @@
 
 The project was published on GitHub pages using Webpack and Node.js so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
 
-![Webpack](./src/images/readme_webpack.svg) ![Node](./src/images/readme_node.svg)
+![Webpack](./src/images/readme_webpack.png) ![Node](./src/images/readme_nodejs.jpg)
 
 ### Implementation of Data via API
 
@@ -16,7 +16,7 @@ The project was published on GitHub pages using Webpack and Node.js so that it c
 
 Methods fetch\(\), then\(\), and finally\(\) were used when interfacing with the API to avoid code being run out of sequence.
 
-![Asych](./src/images/readme_async.png)
+![Async](./src/images/readme_async.png)
 
 **Seemless UX**
 
