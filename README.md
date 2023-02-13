@@ -1,6 +1,28 @@
 # Project 3: Around The U.S.
 
+**Project Link:** [Around the U.S.](https://davidmiles1925.github.io/se_project_aroundtheus/).
+
 ## Project Features:
+
+### Github Publication
+
+The project was published on GitHub pages using Webpack and Node.js so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
+
+![Webpack](.src/images/readme_webpack.svg)![Node](.src/images/readme_node.svg)
+
+### Implementation of Data via API
+
+**Anychronous Code**
+
+Methods fetch\(\), then\(\), and finally\(\) were used when interfacing with the API to avoid code being run out of sequence.
+
+![Asych](.src/images/readme_async.png)
+
+**Seemless UX**
+
+Special attention was given to order of operations to ensure users have a good experience on the page. A "Saving..." feature was added to forms so users know that data is being communicated to/from the server and not experince a "freeze".
+
+![Saving](.src/images/readme_saving.png)
 
 ### Object Oriented Programming
 
@@ -40,32 +62,6 @@ Design specifications were taken from a Figma project and duplicated using HTML 
 
 Images were exported from the Figma project and optimized to reduce loading time and ensure that appropriate file types were used.
 
-### JavaScript
-
-**Objects and Arrays**
-
-An array of objects was created to store the atttributes that would be used to render cards.
-
-![Objects](./src/images/readme_objects.png)
-
-**Selecting Elements**
-
-I used the .querySelector() method to access elements of the document.
-
-![Query](./src/images/readme_querySelector.png)
-
-**Event Listeners**
-
-Event listeners were used to detect when buttons on the page were clicked, and to respond with corresponding functions to complete desired tasks.
-
-![Events](./src/images/readme_events.png)
-
-**Variables and Functions**
-
-Variables were used to store and pass values rather than using 'magic numbers' to perform tasks. Functions were used to generate repeatable code and increase code readability.
-
-![Variables/Functions](./src/images/readme_variables_and_functions.png)
-
 **Loops and Templates**
 
 A for...of loop was used to render cards based on a template instead of hardcoding the cards in the HTML.
@@ -92,6 +88,28 @@ A seperate "validate.js" file was created with dynamic code designed to be reuse
 
 ![Config](./src/images/readme_config.png)
 
-### Github Publication
+### JavaScript Concepts
 
-The project was published on GitHub pages so that it could be accessed from any device. Take a look [here](https://davidmiles1925.github.io/se_project_aroundtheus/).
+**Objects and Arrays**
+
+An array of objects was created to store the atttributes that would be used to render cards.
+
+![Objects](./src/images/readme_objects.png)
+
+**Selecting Elements**
+
+I used the .querySelector() method to access elements of the document.
+
+![Query](./src/images/readme_querySelector.png)
+
+**Event Listeners**
+
+Event listeners were used to detect when buttons on the page were clicked, and to respond with corresponding functions to complete desired tasks.
+
+![Events](./src/images/readme_events.png)
+
+**Variables and Functions**
+
+Variables were used to store and pass values rather than using 'magic numbers' to perform tasks. Functions were used to generate repeatable code and increase code readability.
+
+![Variables/Functions](./src/images/readme_variables_and_functions.png)
