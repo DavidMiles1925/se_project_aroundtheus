@@ -163,7 +163,7 @@ function handleDeleteCard(card) {
         console.log(`Error: ${err.status}`);
       })
       .finally(() => {
-        confirmForm.toggleIsSaving(true);
+        confirmForm.toggleIsSaving(false);
       });
   });
 }
